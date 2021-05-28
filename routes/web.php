@@ -33,14 +33,15 @@ Route::get('admin', function () {
     return view('admin');
 });
 
-// Route::get('adminpanel', function () {
-//     return view('adminpanel');
-// });
+Route::get('addproduct', function () {
+    return view('addproduct');
+});
 
 
 Route::get('products','product_Controller@index');
 Route::get('adminpanel','adminpanel_Controller@index');
 
+Route::post('insertproduct','adminpanel_Controller@addproduct');
 Route::post('adminlogin','admin_Controller@login');
 Route::post('submit','signup_Controller@insert');
 Route::post('cosubmit','contact_Controller@insert');

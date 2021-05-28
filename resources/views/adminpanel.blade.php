@@ -27,7 +27,7 @@
             <a href="#"><span class="fa fa-sticky-note"></span> Products</a>
           </li>
           <li>
-            <a href="#"><span class="fa fa-cogs"></span> Services</a>
+            <a href="addproduct"><span class="fa fa-cogs"></span> Add Product</a>
           </li>
           <li>
             <a href="#"><span class="fa fa-paper-plane"></span> Users</a>
@@ -79,7 +79,7 @@
                                 padding: 5px;
                                 width: 100px;'
                                 src="{{$item['image']}}" class="img-circle elevation-2" alt="User Image"></td>
-                                <td><i class="fa fa-trash fa-3x" aria-hidden="true"></i></td>
+                               <td><i class="fa fa-trash fa-3x" aria-hidden="true"></i></td>
 
                                
                                 <td><i class="fa fa-edit fa-3x" aria-hidden="true"></i></td>

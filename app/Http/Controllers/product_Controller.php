@@ -11,7 +11,7 @@ class product_Controller extends Controller
     // return product::all();
     function index()
     {
-        $data=products::paginate(3);
+        $data=products::paginate(5);
         return view('products',['products'=>$data]);
         // return view('adminpanel',['products'=>$data]);
     }
