@@ -12,19 +12,25 @@
         <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   </head>
   <body>
+
+  @if (session('delete'))
+    <div class="alert alert-success">
+        {{ session('delete') }}
+    </div>
+@endif
 		
 		<div class="wrapper d-flex align-items-stretch">
 			<nav id="sidebar" class="active">
 				<h1><a href="/" class="logo">Admin</a></h1>
         <ul class="list-unstyled components mb-5">
           <li class="active">
-            <a href="#"><span class="fa fa-home"></span> Home</a>
+            <a href="/"><span class="fa fa-home"></span> Home</a>
           </li>
           <li>
-              <a href="#"><span class="fa fa-user"></span> About</a>
+              <a href="about"><span class="fa fa-user"></span> About</a>
           </li>
           <li>
-            <a href="#"><span class="fa fa-sticky-note"></span> Products</a>
+            <a href="products"><span class="fa fa-sticky-note"></span> Products</a>
           </li>
           <li>
             <a href="addproduct"><span class="fa fa-cogs"></span> Add Product</a>
@@ -79,11 +85,11 @@
                                 padding: 5px;
                                 width: 100px;'
                                 src="{{$item['image']}}" class="img-circle elevation-2" alt="User Image"></td>
-                               <td><i class="fa fa-trash fa-3x" aria-hidden="true"></i></td>
-
+                               <!-- <td><i class="fa fa-trash fa-3x" aria-hidden="true"></i></td> -->
+                               <td><a href="deleteproduct/{{$item->id}}"><i class="fa fa-trash fa-3x" aria-hidden="true"></i></a></td>
                                
-                                <td><i class="fa fa-edit fa-3x" aria-hidden="true"></i></td>
-                                <td><i class="fa fa-eye fa-3x" aria-hidden="true"></i></td>
+                               <td><a href="updateproduct/{{$item->id}}"><i class="fa fa-edit fa-3x" aria-hidden="true"></i></a></td>
+                                <td><a href="showprofile/{{$item->id}}"><i class="fa fa-eye fa-3x" aria-hidden="true"></i></a></td>
 
 
                              </tr>
@@ -110,6 +116,22 @@
         
       </div>
 		</div>
+
+
+
+<script type="text/javascript">
+
+// function deletejf(id)
+// {
+//   if(confirm('Are You Sure You Want to Delete?'))
+//   {
+//     window.location.href='{{url('deleteproduct')}}/'+id;
+//   }
+// }
+
+
+</script>
+
 
     <script src="sidebar/js/jquery.min.js"></script>
     <script src="sidebar/js/popper.js"></script>

@@ -41,8 +41,12 @@ Route::get('addproduct', function () {
 Route::get('products','product_Controller@index');
 Route::get('adminpanel','adminpanel_Controller@index');
 
+Route::get('updateproduct/{id}','adminpanel_Controller@updateproduct');
+Route::get('showprofile/{id}','adminpanel_Controller@showproduct');
+Route::get('deleteproduct/{id}','adminpanel_Controller@delproduct');
 Route::post('insertproduct','adminpanel_Controller@addproduct');
 Route::post('adminlogin','admin_Controller@login');
+Route::post('/adminpanel','adminpanel_Controller@update');
 Route::post('submit','signup_Controller@insert');
 Route::post('cosubmit','contact_Controller@insert');
 
