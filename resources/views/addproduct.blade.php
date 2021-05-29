@@ -13,7 +13,7 @@
         {{ session('status') }}
     </div>
 @endif
-    <form action="insertproduct" method="POST">
+    <form action="insertproduct" method="POST" enctype="multipart/form-data" >
     @csrf
     <div>
         Product Name:
@@ -22,6 +22,8 @@
         <input type="text" placeholder="Price" name="price"><br><br><br>
         Description:
         <input type="text" placeholder="Description" name="description"><br>
+        <input type="file"  name="file"><br>
+        
         <input type="submit"  name="submit">
     </div>
     </form>

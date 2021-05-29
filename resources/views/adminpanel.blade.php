@@ -84,7 +84,14 @@
                                 border-radius: 10px;
                                 padding: 5px;
                                 width: 100px;'
-                                src="{{$item['image']}}" class="img-circle elevation-2" alt="User Image"></td>
+                                src="{{asset('/images/'.$item->image)}}" class="img-circle elevation-2" alt="User Image"></td>
+                               <!-- <td class="d1">{{$item['image']}}</td> -->
+                               <!-- <td class="d1"><img 
+                                style='border: 2px solid #ddd; 
+                                border-radius: 10px;
+                                padding: 5px;
+                                width: 100px;'
+                                src="{{$item['image']}}" class="img-circle elevation-2" alt="User Image"></td> -->
                                <!-- <td><i class="fa fa-trash fa-3x" aria-hidden="true"></i></td> -->
                                <td><a href="deleteproduct/{{$item->id}}"><i class="fa fa-trash fa-3x" aria-hidden="true"></i></a></td>
                                

@@ -16,12 +16,23 @@ class adminpanel_Controller extends Controller
 
     function addproduct(Request $request)
     {
-       
+        $file=$request->file('file');
+        $extension=$file->getClientOriginalExtension();
+        $filename=time().'.'.$extension;
+        $file->move('images/',$filename);
+        
+   
     $query=DB::table('products')->insert(
     [
         'product_name'=> $request->input('product_name'),
         'price'=> $request->input('price'),
         'description'=> $request->input('description'),
+        'image'=> $filename,
+        
+
+        // 'image'=>$request->file('file')->store('//images'),
+
+        
    
     ]);
     if($query)
