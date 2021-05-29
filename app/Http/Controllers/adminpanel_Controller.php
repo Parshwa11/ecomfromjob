@@ -39,7 +39,7 @@ class adminpanel_Controller extends Controller
     {
         // $request->session()->flash('msg','Your Message Has Been Succcessfully Recorded. ');
         // return redirect()->route('login');
-        return redirect('/addproduct')->with('status', 'Your Product Has Been Succcessfully Added.');
+        return redirect('/adminpanel')->with('status', 'Your Product Has Been Succcessfully Added.');
     }
 }
 

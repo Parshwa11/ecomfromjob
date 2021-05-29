@@ -156,7 +156,7 @@
                                 border-radius: 10px;
                                 padding: 5px;
                                 width: 100px;'
-                                src="{{$item['image']}}" class="img-circle elevation-2" alt="User Image"></td>
+                                src="{{asset('/images/'.$item->image)}}" class="img-circle elevation-2" alt="User Image"></td>
 
 
                              </tr>

@@ -25,6 +25,7 @@
         Description:
         <input type="text" placeholder="Description" name="description" value="{{$data->description}}"><br>
         <input type="hidden" placeholder="id" name="id" value="{{$data->id}}"><br>
+        <input type="file"  name="file" value="{{asset('/images/'.$data->image)}}"><br>
         
         <input type="submit"  name="submit">
     </div>

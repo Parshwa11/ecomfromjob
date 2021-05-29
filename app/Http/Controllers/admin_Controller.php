@@ -37,4 +37,10 @@ class admin_Controller extends Controller
         //     return redirect('/');
         }
     }
+
+    function index(request $request)
+    {
+        $data = DB::select('select * from products');
+        return view('index',['products'=>$data]);
+    }
 }
