@@ -91,13 +91,26 @@ function update(Request $request)
     // $data->description=$request->description;
     // $data->save();
 
+    // $file=$request->file('file');
+    // $extension=$file->getClientOriginalExtension();
+    // $filename=time().'.'.$extension;
+    // $file->move('images/',$filename);
+
+    $file = $request->file('file');
+    $extension=$file->getClientOriginalExtension();
+    $filename=time().'.'.$extension;
+    $file->move('images/', $filename);
+    
+
     $product_name=$request->input('product_name');
     $price=$request->input('price');
     $description=$request->input('description');
     $id=$request->input('id');
+    $image=$filename;
+    
 
-    DB::update('update products set product_name=?,price=?,description=? where id=?',
-    [$product_name,$price,$description,$id]);
+    DB::update('update products set product_name=?,price=?,description=?,image=? where id=?',
+    [$product_name,$price,$description,$image,$id]);
     return redirect('adminpanel');
 
    

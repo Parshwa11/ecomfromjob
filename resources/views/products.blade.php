@@ -103,6 +103,15 @@
 <body>
 
 
+<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
+  <h3 class="w3-bar-item">Category</h3>
+  @foreach ($cat as $cato)
+  <a href="productbycat/{{$cato->cat_name}}" class="w3-bar-item w3-button">{{$cato->cat_name}}</a>&nbsp&nbsp
+  @endforeach
+</div>
+
+
+
 <tr>
    
   
@@ -131,8 +140,16 @@
                             <div class="col-12">
                               <div class="card">
                                
+                               
 
                             <div class="card-body table-responsive p-0"> -->
+
+            <form action="/search" class="navbar-form navbar-left">
+          <div class="form-group">
+            <input type="text" name="query" class="form-control search-box" placeholder="Search">
+          </div>
+          <button type="submit" class="btn btn-default">Search</button>
+        </form>
                             <table class="table table-hover text-nowrap" >
                             <thead>
                              <tr>

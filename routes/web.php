@@ -19,9 +19,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','admin_Controller@index');
 
+
+
 Route::get('signup', function () {
     return view('signup');
 });
+
+Route::get('search','product_Controller@search');
 
 Route::get('contact', function () {
     return view('contact');
@@ -41,6 +45,8 @@ Route::get('addproduct', function () {
 
 
 Route::get('products','product_Controller@index');
+
+Route::get('productbycat/{cat_name}','product_Controller@bycategory');
 Route::get('adminpanel','adminpanel_Controller@index');
 
 Route::get('updateproduct/{id}','adminpanel_Controller@updateproduct');

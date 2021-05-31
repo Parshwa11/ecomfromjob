@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\admins;
+use App\Models\products;
 
 class admin_Controller extends Controller
 {
@@ -21,7 +22,7 @@ class admin_Controller extends Controller
         $user= admins::where(['email'=>$email])->first();
         if(!$user || $password!=$user->password)
         {
-            return "Username or password is not matched";
+            return redirect('admin')->with('status', 'Email or Password is Wrong Please Check!!.');
         }
         else{
             $req->session()->put('user',$user);
@@ -42,5 +43,12 @@ class admin_Controller extends Controller
     {
         $data = DB::select('select * from products');
         return view('index',['products'=>$data]);
+    }
+
+    function try()
+    {
+        $data=products::all();
+        return view('try',['products'=>$data]);
+        // return view('adminpanel',['products'=>$data]);
     }
 }

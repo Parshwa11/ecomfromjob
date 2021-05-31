@@ -13,7 +13,7 @@
         {{ session('status') }}
     </div>
 @endif -->
-    <form action="/adminpanel" method="post">
+    <form action="/adminpanel" method="post"  enctype="multipart/form-data">
     @csrf  
 
 
@@ -25,7 +25,7 @@
         Description:
         <input type="text" placeholder="Description" name="description" value="{{$data->description}}"><br>
         <input type="hidden" placeholder="id" name="id" value="{{$data->id}}"><br>
-        <input type="file"  name="file" value="{{asset('/images/'.$data->image)}}"><br>
+        <input type="file"  name="file" ><br>
         
         <input type="submit"  name="submit">
     </div>

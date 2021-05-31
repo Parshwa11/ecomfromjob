@@ -13,6 +13,11 @@
       <link rel="stylesheet" href="{{ URL::asset('adminlte/dist/css/adminlte.min.css') }}" />
    </head>
    <body class="hold-transition login-page">
+   @if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
       <div class="login-box">
          <!-- <div class="login-logo">
             <a href="#"><b>Admin</b>LTE</a>
