@@ -174,7 +174,12 @@
                                 padding: 5px;
                                 width: 100px;'
                                 src="{{asset('/images/'.$item->image)}}" class="img-circle elevation-2" alt="User Image"></td>
-
+                                
+                               <td> <form action="addtocart" method="POST">
+                                @csrf
+                                  <input type="text" value="{{$item['token']}}" name="token" >
+                                  <button class="btn btn-primary">add to cart</button>
+                                </form></td>
 
                              </tr>
                              </tbody>

@@ -1,3 +1,10 @@
+<?php
+
+use App\Http\Controllers\product_Controller;
+$total=product_Controller::cartitem();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -193,9 +200,10 @@
                 <div class="attr-nav">
                     <ul>
                         <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                        <li class="side-menu"><a href="#">
+                        <li class="side-menu">
+                        <a href="showcart">
 						<i class="fa fa-shopping-bag"></i>
-                            <span class="badge">3</span>
+                            <span class="badge">{{$total}}</span>
 					</a></li>
                     </ul>
                 </div>

@@ -25,6 +25,17 @@
         Description:
         <input type="text" placeholder="Description" name="description" value="{{$data->description}}"><br>
         <input type="hidden" placeholder="id" name="id" value="{{$data->id}}"><br>
+
+   
+        <p>Update Category:</p>
+      <select id="marks" name="category">                      
+      <option   value="0">--update Category--</option>
+      <option  name="drop" value="men">men</option>
+      <option   name="drop" value="women">women</option>
+      <option   name="drop" value="other">other</option>
+      </select><br>
+
+
         <input type="file"  name="file" ><br>
         
         <input type="submit"  name="submit">

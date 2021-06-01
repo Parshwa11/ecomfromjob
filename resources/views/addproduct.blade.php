@@ -18,6 +18,16 @@
         <input type="text" placeholder="Price" name="price"><br><br><br>
         Description:
         <input type="text" placeholder="Description" name="description"><br>
+        
+      <p>Please enter Category:</p>
+      <select id="marks" name="category">                      
+      <option   value="0">--select Category--</option>
+      <option  name="drop" value="men">men</option>
+      <option   name="drop" value="women">women</option>
+      <option   name="drop" value="other">other</option>
+      </select><br>
+     
+  
         <input type="file"  name="file"><br>
         
         <input type="submit"  name="submit">

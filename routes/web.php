@@ -57,6 +57,8 @@ Route::post('adminlogin','admin_Controller@login');
 Route::post('/adminpanel','adminpanel_Controller@update');
 Route::post('submit','signup_Controller@insert');
 Route::post('cosubmit','contact_Controller@insert');
+Route::post('addtocart','product_Controller@addtocart');
+Route::get('showcart','product_Controller@showcart');
 
 // Route::post('submit', [test::class, 'hello']);
 
