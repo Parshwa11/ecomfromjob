@@ -177,7 +177,7 @@
                                 
                                <td> <form action="addtocart" method="POST">
                                 @csrf
-                                  <input type="text" value="{{$item['token']}}" name="token" >
+                                  <input type="hidden" value="{{$item['token']}}" name="token" >
                                   <button class="btn btn-primary">add to cart</button>
                                 </form></td>
 

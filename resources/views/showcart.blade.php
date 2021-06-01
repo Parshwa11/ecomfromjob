@@ -3,6 +3,7 @@
 use App\Http\Controllers\product_Controller;
 $cartitemscount=product_Controller::cartitem();
 $cartitemstotal=product_Controller::cartitemtotal();
+$cart_item_total_with_gst=product_Controller::cart_item_total_with_gst();
 
 // $total=product_Controller::cartitemtotal();
 
@@ -22,7 +23,11 @@ $cartitemstotal=product_Controller::cartitemtotal();
 <body>
 
 
-
+@if (session('delete'))
+    <div class="alert alert-success">
+        {{ session('delete') }}
+    </div>
+@endif
 <!-- @foreach ($cartitems as $item)
 <p>{{$item->product_name}}</p>
 <p>{{$item->price}}</p>
@@ -81,10 +86,9 @@ $cartitemstotal=product_Controller::cartitemtotal();
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
-                    <a href="#!" type="button" class="card-link-secondary small text-uppercase mr-3"><i
+                    <a href="removecart/{{$item->cartid}}" type="button" class="card-link-secondary small text-uppercase mr-3"><i
                         class="fas fa-trash-alt mr-1"></i> Remove item </a>
-                    <a href="#!" type="button" class="card-link-secondary small text-uppercase"><i
-                        class="fas fa-heart mr-1"></i> Move to wish list </a>
+                    
                   </div>
                   <p class="mb-0"><span><strong id="summary">Price : {{$item->price}}₹</strong></span></p class="mb-0">
                 </div>
@@ -147,20 +151,28 @@ $cartitemstotal=product_Controller::cartitemtotal();
           <ul class="list-group list-group-flush">
             <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
               Temporary amount
-              <span>$25.98</span>
+              <span>{{$cartitemstotal}} ₹</span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
               Shipping
-              <span>Gratis</span>
+              <span>0.00 ₹</span>  
             </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+              GST Amount
+              <span>12 %</span>
+            </li>
+            
+            
+        
+
             <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
               <div>
                 <strong>The total amount of</strong>
                 <strong>
-                  <p class="mb-0">(including VAT)</p>
+                  <p class="mb-0">(including GST)</p>
                 </strong>
               </div>
-              <span><strong>{{$cartitemstotal}} ₹</strong></span>
+              <span><strong>{{$cart_item_total_with_gst}} ₹</strong></span>
             </li>
           </ul>
 

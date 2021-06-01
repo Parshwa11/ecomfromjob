@@ -59,6 +59,7 @@ Route::post('submit','signup_Controller@insert');
 Route::post('cosubmit','contact_Controller@insert');
 Route::post('addtocart','product_Controller@addtocart');
 Route::get('showcart','product_Controller@showcart');
+Route::get('removecart/{cartid}','cart_Controller@removecart');
 
 // Route::post('submit', [test::class, 'hello']);
 
