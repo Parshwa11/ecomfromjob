@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
+
+use Illuminate\Support\Facades\DB;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +27,10 @@ Route::get('/','admin_Controller@index');
 
 Route::get('signup', function () {
     return view('signup');
+});
+
+Route::get('checkout', function () {
+    return view('checkout');
 });
 
 Route::get('search','product_Controller@search');
@@ -66,3 +74,15 @@ Route::get('removecart/{cartid}','cart_Controller@removecart');
 Route::get('/login', function () {
     return view('login');
 });
+
+
+
+// View::composer(['*'], function ($view) {
+
+//     $cartitems = DB::table('carts')
+//          ->join('products', 'carts.token', '=', 'products.token')
+        
+//          ->select('products.product_name', 'products.price', 'products.id','products.description','products.image','carts.id as cartid')
+//          ->get();    
+//     $view->with('cartitems', $cartitems);
+// });

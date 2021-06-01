@@ -83,5 +83,16 @@ class product_Controller extends Controller
 
 
             return view('showcart',['cartitems'=>$cartitems]);
+
+
+        // view()->composer(['showcart', 'checkout'], function ($view) {
+
+        //     $cartitems = DB::table('carts')
+        //          ->join('products', 'carts.token', '=', 'products.token')
+                
+        //          ->select('products.product_name', 'products.price', 'products.id','products.description','products.image','carts.id as cartid')
+        //          ->get();    
+        //     $view->with('cartitems', $cartitems);
+        // });
     }
 }

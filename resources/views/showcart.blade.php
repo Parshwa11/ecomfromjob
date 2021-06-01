@@ -176,7 +176,7 @@ $cart_item_total_with_gst=product_Controller::cart_item_total_with_gst();
             </li>
           </ul>
 
-          <button type="button" class="btn btn-primary btn-block">go to checkout</button>
+          <a href="checkout"><button type="button" class="btn btn-primary btn-block">go to checkout</button></a>
 
         </div>
       </div>
