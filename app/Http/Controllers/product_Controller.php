@@ -46,7 +46,7 @@ class product_Controller extends Controller
         $cart->token=$req->token;
         $cart->save();
 
-        return redirect('adminpanel');
+        return redirect('showcart');
     }
 
     static function cartitem()
@@ -56,8 +56,10 @@ class product_Controller extends Controller
 
     static function cartitemtotal()
     {
-  
-        return DB::table('carts')->sum('price');
+        return DB::table('carts')
+        ->join('products', 'carts.token', '=', 'products.token')
+            ->sum('products.price')
+            ;
     }
 
     function showcart()
@@ -67,6 +69,7 @@ class product_Controller extends Controller
             
             ->select('products.product_name', 'products.price', 'products.id','products.description','products.image')
             ->get();
+
 
             return view('showcart',['cartitems'=>$cartitems]);
     }

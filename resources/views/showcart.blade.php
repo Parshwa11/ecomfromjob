@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\product_Controller;
 $cartitemscount=product_Controller::cartitem();
-$total=product_Controller::cartitemtotal();
+$cartitemstotal=product_Controller::cartitemtotal();
+
+// $total=product_Controller::cartitemtotal();
 
 
 ?>
@@ -158,7 +160,7 @@ $total=product_Controller::cartitemtotal();
                   <p class="mb-0">(including VAT)</p>
                 </strong>
               </div>
-              <span><strong>{{$total}}}</strong></span>
+              <span><strong>{{$cartitemstotal}} ₹</strong></span>
             </li>
           </ul>
 
