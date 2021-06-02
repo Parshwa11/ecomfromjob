@@ -29,9 +29,11 @@ Route::get('signup', function () {
     return view('signup');
 });
 
-Route::get('checkout', function () {
-    return view('checkout');
+Route::get('invoice_astext', function () {
+    return view('invoice_astext');
 });
+
+Route::get('checkout','checkout_Controller@checkout');
 
 Route::get('search','product_Controller@search');
 
@@ -66,7 +68,7 @@ Route::post('/adminpanel','adminpanel_Controller@update');
 Route::post('submit','signup_Controller@insert');
 Route::post('cosubmit','contact_Controller@insert');
 Route::post('addtocart','product_Controller@addtocart');
-// Route::post('add_to_cart_from_catview','product_Controller@addtocart');
+Route::post('ordered','checkout_Controller@insert');
 Route::get('showcart','product_Controller@showcart');
 Route::get('removecart/{cartid}','cart_Controller@removecart');
 

@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\products;
 use App\Models\carts;
 use Illuminate\Http\Request;
+use App\Functions\functions;
+
 
 
 class product_Controller extends Controller
@@ -72,6 +74,13 @@ class product_Controller extends Controller
         return $carttotalwithgst*0.12+$carttotalwithgst;
     }
 
+
+
+
+
+
+    // $files =   showcart();
+
     function showcart()
     {
         $cartitems = DB::table('carts')
@@ -94,4 +103,7 @@ class product_Controller extends Controller
         //     $view->with('cartitems', $cartitems);
         // });
     }
+
+
+    
 }
