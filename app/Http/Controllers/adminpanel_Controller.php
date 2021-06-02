@@ -27,7 +27,9 @@ class adminpanel_Controller extends Controller
         'product_name'=> $request->input('product_name'),
         'price'=> $request->input('price'),
         'description'=> $request->input('description'),
+        'category'=> $request->input('category'),
         'image'=> $filename,
+        'token'=> rand(100,1000),
         
 
         // 'image'=>$request->file('file')->store('//images'),

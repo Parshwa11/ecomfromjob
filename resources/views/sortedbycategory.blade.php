@@ -77,12 +77,24 @@
                                <td class="d1">{{$item->product_name}}</td>
                                <td class="d1">{{$item->price}}</td>
                                <td class="d1">{{$item->description}}</td>
+                               
                                <td class="d1"><img 
                                 style='border: 2px solid #ddd; 
                                 border-radius: 10px;
                                 padding: 5px;
                                 width: 100px;'
                                 src="{{asset('/images/'.$item->image)}}" class="img-circle elevation-2" alt="User Image"></td>
+
+                                <td> 
+                                <form action="/addtocart" method="post">
+                                @csrf
+                                
+                                <input type="hidden" value="{{$item->token}}" name="token" >
+                                  <button class="btn btn-primary">add to cart</button>
+                                </form>
+                                </td>
+
+                                
 
 
                              </tr>

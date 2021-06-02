@@ -37,6 +37,8 @@ class AppServiceProvider extends ServiceProvider
 
             // view::share('cartitems',$cartitems);
 
+            // View::composer([])
+
 
         
     }

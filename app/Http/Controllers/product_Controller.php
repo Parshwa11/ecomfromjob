@@ -31,8 +31,7 @@ class product_Controller extends Controller
     
     function bycategory(Request $req,$cat_name)
     {
-        
-
+     
         $cato = DB::table('products')
                 ->where('category', '=', $cat_name)
                 ->get();

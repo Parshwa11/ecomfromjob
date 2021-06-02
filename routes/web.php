@@ -66,6 +66,7 @@ Route::post('/adminpanel','adminpanel_Controller@update');
 Route::post('submit','signup_Controller@insert');
 Route::post('cosubmit','contact_Controller@insert');
 Route::post('addtocart','product_Controller@addtocart');
+// Route::post('add_to_cart_from_catview','product_Controller@addtocart');
 Route::get('showcart','product_Controller@showcart');
 Route::get('removecart/{cartid}','cart_Controller@removecart');
 
