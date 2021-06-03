@@ -91,6 +91,7 @@ class product_Controller extends Controller
 
 
             return view('showcart',['cartitems'=>$cartitems]);
+            // return view('checkout',['cartitems'=>$cartitems]);
 
 
         // view()->composer(['showcart', 'checkout'], function ($view) {

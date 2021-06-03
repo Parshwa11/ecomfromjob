@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\DB;
 
 Route::get('/','admin_Controller@index');
 
+Route::get('pdfview',array('as'=>'pdfview','uses'=>'pdf_Controller@pdfview'));
 
 
 Route::get('signup', function () {
@@ -54,7 +55,10 @@ Route::get('addproduct', function () {
 });
 
 
+Route::get('pdfy','pdfy_Controller@hello');
+Route::post('signed','signup_Controller@signed');
 Route::get('products','product_Controller@index');
+Route::get('export_as_xls','checkout_Controller@export');
 
 Route::get('productbycat/{cat_name}','product_Controller@bycategory');
 Route::get('adminpanel','adminpanel_Controller@index');

@@ -21,7 +21,9 @@
          <div class="card">
             <div class="card-body login-card-body">
                <p class="login-box-msg">Sign in to start your session</p>
-               <form action="login.php" method="post">
+               <form action="\signed" method="post">
+               @csrf
+
                   <div class="input-group mb-3">
                      <input type="email" name="email" id="email" class="form-control" placeholder="Email" value="<?php if(isset($_COOKIE['emailc']))
                         {echo $_COOKIE['emailc'];} ?>">

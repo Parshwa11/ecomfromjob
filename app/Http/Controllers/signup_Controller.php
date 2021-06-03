@@ -52,5 +52,43 @@ $query=DB::table('signup')->insert(
     }
 
     }
+
+
+    function signed(Request $request)
+    {
+
+        $email= $request->input('email');
+        $password= $request->input('password');
+
+
+        $user = DB::table('signup')
+        ->where('email',$email)
+        ->where('password',$password)
+        ->first();
+
+        // foreach ($user as $title) {
+        //     echo $title[$id];
+        // }
+
+        
+
+
+
+        if($user)
+        {
+          echo  $email;
+          echo $password;
+
+        
+
+          $request->session()->put('userid', $user->id);
+        }
+        else{
+           echo "tata";
+        }
+
+    
+
+    }
 }
 

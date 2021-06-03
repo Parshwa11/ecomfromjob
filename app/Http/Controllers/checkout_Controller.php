@@ -25,7 +25,15 @@ class checkout_Controller extends Controller
 
     function insert(Request $request)
     {
-        $email = $request->input('email') ;
+        // $email = $request->input('email') ;
+        $address = $request->input('address');
+        $email = $request->input('email');
+        $name = $request->input('name');
+        $state = $request->input('state');
+        $city = $request->input('city');
+        $zip = $request->input('zip');
+        $userid = $request->session()->get('userid');
+
     $query=DB::table('orders')->insert(
     [
         'name'=> $request->input('name'),
@@ -34,6 +42,7 @@ class checkout_Controller extends Controller
         'state'=> $request->input('state'),
         'city'=> $request->input('city'),
         'zip'=> $request->input('zip'),
+        'userid'=> $userid,
 
     ]);
 
@@ -50,17 +59,24 @@ class checkout_Controller extends Controller
         ->select('products.product_name','products.token', 'products.price', 'products.id','products.description','products.image','carts.id as cartid')
         ->get();
 
-        if($cartitems)
-        {
-            $orders = DB::table('orders')
-            ->select('address')
-            ->where('email','=', $email)
-            ->first();
+        // if($cartitems)
+        // {
+        //     $orders = DB::table('orders')
+        //     ->select('address')
+        //     ->where('email','=', $email)
+        //     ->first();
 
 
-        return view('invoice_astext',['cartitems'=>$cartitems]);
+        return view('invoice_astext',['cartitems'=>$cartitems])->with(['address'=>$address,'name'=>$name,'email'=>$email,'state'=>$state,'city'=>$city,'zip'=>$zip]);
+
     }
     }
     }
-}
+
+
+    function export()
+    {
+
+    }
+
 
