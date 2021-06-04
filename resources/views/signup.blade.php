@@ -21,6 +21,22 @@
         {{ session('status') }}
     </div>
 @endif
+
+@if (session('status1'))
+    <div class="alert alert-success">
+        {{ session('status1') }}
+    </div>
+@endif
+@if (session('status2'))
+    <div class="alert alert-success">
+        {{ session('status2') }}
+    </div>
+@endif
+@if (session('status3'))
+    <div class="alert alert-success">
+        {{ session('status3') }}
+    </div>
+@endif
       <div class="register-box">
          <!-- <div class="register-logo">
             <a href="indexprac.html"><b>Admin</b>LTE</a>
@@ -103,6 +119,7 @@
             </div>
             </form>
             <a href="/login" class="text-center">I already have a membership</a>
+            <a href="/admin" class="text-center">I have Admin Credentials</a>
          </div>
       </div>
       </div>

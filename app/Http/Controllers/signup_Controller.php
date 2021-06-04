@@ -33,14 +33,19 @@ class signup_Controller extends Controller
     // }
 // }
 
-$query=DB::table('signup')->insert(
-    [
-        'username'=> $request->input('username'),
-        'email'=> $request->input('email'),
-        'password'=> $request->input('password'),
-        'authentication'=> $request->input('rad1'),
-        'dob'=> $request->input('bd'),
-    ]);
+$authentication = $request->input('rad1');
+if($authentication=="user")
+        
+{
+
+    $query=DB::table('signup')->insert(
+        [
+            'username'=> $request->input('username'),
+            'email'=> $request->input('email'),
+            'password'=> $request->input('password'),
+            'authentication'=> $request->input('rad1'),
+            'dob'=> $request->input('bd'),
+        ]);
 
     
     if($query)
@@ -50,6 +55,23 @@ $query=DB::table('signup')->insert(
 
         return redirect('/signup')->with('status', 'Thank You For Registering With Us.');
     }
+}
+else
+{
+    $query1=DB::table('admins')->insert(
+        [
+            
+            'email'=> $request->input('email'),
+            'password'=> $request->input('password'),
+           
+        ]);
+
+        if($query1)
+    {
+        
+        return redirect('/signup')->with('status1', 'You are Registered with us As ADMIN.');
+    }
+}
 
     }
 
@@ -70,21 +92,29 @@ $query=DB::table('signup')->insert(
         //     echo $title[$id];
         // }
 
-        
-
-
-
         if($user)
         {
-          echo  $email;
-          echo $password;
-
-        
-
+     
           $request->session()->put('userid', $user->id);
+          return redirect('/');
         }
-        else{
-           echo "tata";
+        else
+        {
+
+        $admin = DB::table('admins')
+        ->where('email',$email)
+        ->where('password',$password)
+        ->first();
+
+            if($admin)
+            {
+                return redirect('/signup')->with('status2', 'Seems Like You Are Admin please Proceed To admin panel.');
+            }
+            else
+            {
+                return redirect('/signup')->with('status3', 'You are Not Registered Please Register So You can Start Buying');
+            }
+
         }
 
     

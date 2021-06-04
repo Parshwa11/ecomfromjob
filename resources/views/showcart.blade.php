@@ -5,7 +5,7 @@ $cartitemscount=product_Controller::cartitem();
 $cartitemstotal=product_Controller::cartitemtotal();
 $cart_item_total_with_gst=product_Controller::cart_item_total_with_gst();
 
-// $total=product_Controller::cartitemtotal();
+$total=product_Controller::cartitemtotal();
 
 
 ?>

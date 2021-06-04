@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\products;
+use App\Models\signup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -118,5 +119,24 @@ function update(Request $request)
    
 }
 
+function showusers()
+{
+
+    $data=signup::paginate(10);
+    return view('showusers',['users'=>$data]);
 }
 
+function deluser($id,Request $request)
+{
+
+    $query=signup::where('id',$id)->first();
+
+    if($query)
+    {
+        signup::where('id',$id)->delete();
+        return redirect('/showusers')->with('delete', 'User Has Been Succcessfully Deleted.');
+    }
+
+
+}
+}

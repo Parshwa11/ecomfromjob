@@ -8,10 +8,12 @@ use Illuminate\Http\Request;
 
 class checkout_Controller extends Controller
 {
-    function checkout()
+    function checkout(Request $req)
     {
+        $userid = $req->session()->get('userid');
         $cartitems = DB::table('carts')
             ->join('products', 'carts.token', '=', 'products.token')
+            ->where('carts.userid',$userid)
             
             ->select('products.product_name','products.token', 'products.price', 'products.id','products.description','products.image','carts.id as cartid')
             ->get();
@@ -53,11 +55,13 @@ class checkout_Controller extends Controller
         // return $ret;
         
         
+        $userid = $request->session()->get('userid');
         $cartitems = DB::table('carts')
-        ->join('products', 'carts.token', '=', 'products.token')
-        
-        ->select('products.product_name','products.token', 'products.price', 'products.id','products.description','products.image','carts.id as cartid')
-        ->get();
+            ->join('products', 'carts.token', '=', 'products.token')
+            ->where('carts.userid',$userid)
+            
+            ->select('products.product_name','products.token', 'products.price', 'products.id','products.description','products.image','carts.id as cartid')
+            ->get();
 
         // if($cartitems)
         // {

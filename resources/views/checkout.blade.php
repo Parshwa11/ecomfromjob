@@ -164,9 +164,9 @@ span.price {
           <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
         </label>
         <input type="submit" value="Continue to checkout" class="btn">
-        @foreach($cartitems as $items)
+        <!-- @foreach($cartitems as $items)
         <input type="text" value="{{$items->product_name}}" name="productname" >
-          @endforeach
+          @endforeach -->
 
           
       </form>

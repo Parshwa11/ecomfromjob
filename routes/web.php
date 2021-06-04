@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Session;
 
 use Illuminate\Support\Facades\DB;
 
@@ -28,6 +29,12 @@ Route::get('pdfview',array('as'=>'pdfview','uses'=>'pdf_Controller@pdfview'));
 
 Route::get('signup', function () {
     return view('signup');
+});
+
+Route::get('logout', function () {
+
+    Session::forget('userid');
+    return redirect('login');
 });
 
 Route::get('invoice_astext', function () {
@@ -59,6 +66,7 @@ Route::get('pdfy','pdfy_Controller@hello');
 Route::post('signed','signup_Controller@signed');
 Route::get('products','product_Controller@index');
 Route::get('export_as_xls','checkout_Controller@export');
+Route::get('showusers','adminpanel_Controller@showusers');
 
 Route::get('productbycat/{cat_name}','product_Controller@bycategory');
 Route::get('adminpanel','adminpanel_Controller@index');
@@ -66,6 +74,7 @@ Route::get('adminpanel','adminpanel_Controller@index');
 Route::get('updateproduct/{id}','adminpanel_Controller@updateproduct');
 Route::get('showprofile/{id}','adminpanel_Controller@showproduct');
 Route::get('deleteproduct/{id}','adminpanel_Controller@delproduct');
+Route::get('deleteuser/{id}','adminpanel_Controller@deluser');
 Route::post('insertproduct','adminpanel_Controller@addproduct');
 Route::post('adminlogin','admin_Controller@login');
 Route::post('/adminpanel','adminpanel_Controller@update');

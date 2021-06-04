@@ -89,7 +89,15 @@ $total=product_Controller::cartitem();
 					</select>
                     </div> -->
                     <div class="right-phone-box">
-                        <p>Call US :- <a href="#"> +91 (9664912183)</a></p>
+                        <!-- <p>Call US :- <a href="#"> +91 (9664912183)</a></p> -->
+                      
+         
+          @if(Session::has('userid'))
+        <a href="logout"> <button class='btn btn-success'>LOGOUT</button></a>
+          @else
+          <a href="login"> <button class='btn btn-primary'>LOGIN</button></a>
+          @endif
+        
                     </div>
                     <div class="our-link">
                         <ul>

@@ -13,15 +13,10 @@
   </head>
   <body>
 
+
   @if (session('delete'))
     <div class="alert alert-success">
         {{ session('delete') }}
-    </div>
-@endif
-
-@if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
     </div>
 @endif
 		
@@ -57,52 +52,28 @@
       <div id="content" class="p-4 p-md-5">
 
       <section class="content">
-                            <!-- <div class="pull-right">
-                                {{ $products->links() }}
-                            </div> -->
-                             <!-- <div class="row">
-                            <div class="col-12">
-                              <div class="card">
-                               
-
-                            <div class="card-body table-responsive p-0"> -->
+                         
                             <table class="table table-hover text-nowrap" >
                             <thead>
                              <tr>
                                <th>ID</th>
                                <th>Name</th> 
-                               <th>price</th>
-                               <th>description</th>
-                               <th>Picture</th>
-                               <th>Action</th>
+                               <th>Email</th>
+                               <th>DOB</th>
+                               
                              </tr>
                            </thead>
 
-                           @foreach ($products as $item)
+                           @foreach ($users as $user)
                                   <tbody>
                              <tr class="r1">
-                               <td class="d1">{{$item['id']}}</td>
-                               <td class="d1">{{$item['product_name']}}</td>
-                               <td class="d1">{{$item['price']}}</td>
-                               <td class="d1">{{$item['description']}}</td>
-                               <td class="d1"><img 
-                                style='border: 2px solid #ddd; 
-                                border-radius: 10px;
-                                padding: 5px;
-                                width: 100px;'
-                                src="{{asset('/images/'.$item->image)}}" class="img-circle elevation-2" alt="User Image"></td>
-                               <!-- <td class="d1">{{$item['image']}}</td> -->
-                               <!-- <td class="d1"><img 
-                                style='border: 2px solid #ddd; 
-                                border-radius: 10px;
-                                padding: 5px;
-                                width: 100px;'
-                                src="{{$item['image']}}" class="img-circle elevation-2" alt="User Image"></td> -->
-                               <!-- <td><i class="fa fa-trash fa-3x" aria-hidden="true"></i></td> -->
-                               <td><a href="deleteproduct/{{$item->id}}"><i class="fa fa-trash fa-3x" aria-hidden="true"></i></a></td>
+                               <td class="d1">{{$user['id']}}</td>
+                               <td class="d1">{{$user['username']}}</td>
+                               <td class="d1">{{$user['email']}}</td>
+                               <td class="d1">{{$user['dob']}}</td>
+                               <td><a href="deleteuser/{{$user->id}}"><i class="fa fa-trash fa-3x" aria-hidden="true"></i></a></td>
                                
-                               <td><a href="updateproduct/{{$item->id}}"><i class="fa fa-edit fa-3x" aria-hidden="true"></i></a></td>
-                                <td><a href="showprofile/{{$item->id}}"><i class="fa fa-eye fa-3x" aria-hidden="true"></i></a></td>
+                             
 
 
                              </tr>
@@ -123,7 +94,7 @@
                            </section>
 
                            <div>
-                             {!! $products->appends(['sort' => 'department'])->links() !!}
+                           
                             </div>
         
         
@@ -131,7 +102,9 @@
 		</div>
 
 
-
+        <div>
+                             {!! $users->appends(['sort' => 'department'])->links() !!}
+                            </div>
 <script type="text/javascript">
 
 // function deletejf(id)
