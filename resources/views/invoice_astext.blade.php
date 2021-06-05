@@ -88,23 +88,23 @@ $cart_item_total_with_gst=product_Controller::cart_item_total_with_gst();
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-<script>
 
-function Export() {
-            html2canvas(document.getElementById('aa'), {
-                onrendered: function (canvas) {
-                  // var pdf = new jsPDF("l", "mm", "a4");
-// var imgData = canvas.toDataURL('image/jpeg', 1.0);
-                    var data = canvas.toDataURL();
-                    var docDefinition = {
-                        content: [{
-                            image: data,
+<!-- 
+// function Export() {
+//             html2canvas(document.getElementById('aa'), {
+//                 onrendered: function (canvas) {
+//                   // var pdf = new jsPDF("l", "mm", "a4");
+// // var imgData = canvas.toDataURL('image/jpeg', 1.0);
+//                     var data = canvas.toDataURL();
+//                     var docDefinition = {
+//                         content: [{
+//                             image: data,
                            
-                        }]
-                    };
-                    pdfMake.createPdf(docDefinition).download("invoice.pdf");
-                }
-            });
+//                         }]
+//                     };
+//                     pdfMake.createPdf(docDefinition).download("invoice.pdf");
+//                 }
+//             });
 // html2canvas(document.getElementById("aa"), {
 //         onrendered: function (canvas) {
 
@@ -128,16 +128,15 @@ function Export() {
 //         //width: 300,
 //         //height: 300
 //     });
-        }
+        // }
+
+ -->
 
 
 
+       
 
-
-</script>
-<input type="submit" value ="Export" onclick="Export()">
-
-<a href="{{ route('pdfview',['download'=>'pdf']) }}">Download PDF</a>
+ <a class="btn btn-primary" href="{{ URL::to('generate-pdf') }}">Export to PDF</a>
 
 </body>
 </html>

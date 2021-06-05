@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\PDFController;
 
 use Illuminate\Support\Facades\DB;
 
@@ -61,7 +62,7 @@ Route::get('addproduct', function () {
     return view('addproduct');
 });
 
-
+Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
 Route::get('pdfy','pdfy_Controller@hello');
 Route::post('signed','signup_Controller@signed');
 Route::get('products','product_Controller@index');
