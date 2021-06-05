@@ -26,10 +26,11 @@ class PDFController extends Controller
         // $data = products::all();
 
 
-            view()->share('cartitems',$cartitems,'orders',$orders);
+            view()->share('cartitems',$cartitems);
             
           
-        $pdf = PDF::loadView('myPDF',$cartitems,$orders);
+        $pdf = PDF::loadView('myPDF',$cartitems,compact('orders'));
+        
     
         return $pdf->download('pdf_file.pdf');
     }

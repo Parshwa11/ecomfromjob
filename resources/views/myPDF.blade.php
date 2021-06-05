@@ -30,21 +30,23 @@ $cart_item_total_with_gst=product_Controller::cart_item_total_with_gst();
   
      <div class="col-sm-10">
      <p><b>Date : </b>{{$ldate}}</p>
+     <p style="
+      text-align: left;"><b>From : </b>TheWayShop Inc.</p>
      @foreach ($orders as $order)
      <p style="
       text-align: right;"><b>Address : </b>{{$order->address}}</p>
       @endforeach
       @foreach ($orders as $order)
      <p style="
-      text-align: right;"><b>Address : </b>{{$order->city}}</p>
+      text-align: right;"><b> </b>{{$order->city}}</p>
       @endforeach
       @foreach ($orders as $order)
      <p style="
-      text-align: right;"><b>Address : </b>{{$order->zip}}</p>
+      text-align: right;"><b> </b>{{$order->zip}}</p>
       @endforeach
       @foreach ($orders as $order)
      <p style="
-      text-align: right;"><b>Address : </b>{{$order->state}}</p>
+      text-align: right;"><b> </b>{{$order->state}}</p>
       @endforeach
 
      

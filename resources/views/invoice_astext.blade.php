@@ -82,7 +82,7 @@ $cart_item_total_with_gst=product_Controller::cart_item_total_with_gst();
      </div>
 </div>
 
-<a><i class="fa fa-print" onClick="window.print()"></i> Print</a>
+<!-- <a><i class="fa fa-print" onClick="window.print()"></i> Print</a> -->
 <!-- <a href="export_as_xls"class="btn btn-warning"> EXPORT. </a> -->
 
 
@@ -137,6 +137,7 @@ $cart_item_total_with_gst=product_Controller::cart_item_total_with_gst();
        
 
  <a class="btn btn-primary" href="{{ URL::to('generate-pdf') }}">Export to PDF</a>
+ <a class="btn btn-primary" href="{{ URL::to('export') }}">Export to Excel</a>
 
 </body>
 </html>

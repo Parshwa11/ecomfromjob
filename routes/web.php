@@ -62,6 +62,8 @@ Route::get('addproduct', function () {
     return view('addproduct');
 });
 
+Route::get('export', 'excel_Controller@export');
+
 Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
 Route::get('pdfy','pdfy_Controller@hello');
 Route::post('signed','signup_Controller@signed');
