@@ -58,6 +58,8 @@ class product_Controller extends Controller
         $cart=new carts;
         $cart->token=$req->token;
         $cart->userid=$req->session()->get('userid');
+        $cart->quantity=1;
+
         $cart->save();
 
         return redirect('showcart');
@@ -99,6 +101,26 @@ class product_Controller extends Controller
     }
 
 
+    static function price_with_qty_increase()
+    {
+        $userid = Session::get('userid');
+        $qty= DB::table('carts')
+        ->join('products', 'carts.token', '=', 'products.token')
+        ->where('userid', $userid)
+        ->get('carts.quantity')
+            ;
+
+            $qty_mul_price= DB::table('carts')
+        ->join('products', 'carts.token', '=', 'products.token')
+        ->where('userid', $userid)
+        ->get('products.price')
+            ;
+
+            $test= $qty * $qty_mul_price;
+
+        return $test ;
+    }
+
 
 
 
@@ -112,7 +134,7 @@ class product_Controller extends Controller
             ->join('products', 'carts.token', '=', 'products.token')
             ->where('carts.userid',$userid)
             
-            ->select('products.product_name', 'products.price', 'products.id','products.description','products.image','carts.id as cartid')
+            ->select('products.product_name', 'products.price', 'products.id','products.description','products.image','carts.id as cartid','carts.quantity')
             ->get();
 
 

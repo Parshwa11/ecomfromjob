@@ -70,6 +70,7 @@ Route::post('signed','signup_Controller@signed');
 Route::get('products','product_Controller@index');
 Route::get('export_as_xls','checkout_Controller@export');
 Route::get('showusers','adminpanel_Controller@showusers');
+Route::get('/updatecartqty/{id}/{quantity}','cart_Controller@updatecartqty');
 
 Route::get('productbycat/{cat_name}','product_Controller@bycategory');
 Route::get('adminpanel','adminpanel_Controller@index');

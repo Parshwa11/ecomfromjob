@@ -5,6 +5,8 @@ $cartitemscount=product_Controller::cartitem();
 $cartitemstotal=product_Controller::cartitemtotal();
 $cart_item_total_with_gst=product_Controller::cart_item_total_with_gst();
 
+// $price_with_qty_increase=product_Controller::price_with_qty_increase();
+
 $total=product_Controller::cartitemtotal();
 
 
@@ -50,6 +52,8 @@ $total=product_Controller::cartitemtotal();
         <div class="pt-4 wish-list">
 
           <h5 class="mb-4">Cart (<span>{{$cartitemscount}}</span> items)</h5>
+          
+
           @foreach ($cartitems as $item)
 
           <div class="row mb-4">
@@ -71,19 +75,30 @@ $total=product_Controller::cartitemtotal();
                     
                     <p class="mb-3 text-muted text-uppercase small">Size: M</p>
                   </div>
-                  <!-- <div>
-                    <div class="def-number-input number-input safari_only mb-0 w-100">
-                      <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                        class="fas fa-decrease"></button>
-                      <input class="quantity" min="0" name="quantity" value="1" type="number">
-                      <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                        class="fas fa-plus"></button>
-                    </div>
-                    <small id="passwordHelpBlock" class="form-text text-muted text-center">
-                      (Note, 1 piece)
-                    </small>
-                  </div> -->
-                </div>
+
+
+
+                   <!-- <form>
+  <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+  <input type="number" id="number" value="0" />
+  <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+</form> -->
+<div>
+@if($item->quantity>1)
+<a href="{{url('/updatecartqty/'.$item->cartid.'/-1')}}">-</a>
+@endif
+<input type="text" id="number" value="{{$item->quantity}}" >
+<a href="{{url('/updatecartqty/'.$item->cartid.'/1')}}">+</a>
+
+</div>
+
+                </div> 
+                {{ $old_section = ($item->quantity * $item->price)}}
+                <!-- {{ $section = ($old_section + $old_section)}} -->
+                <input type="text" class="pricewithqty" value="{{$old_section}}" >
+             
+               
+
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
                     <a href="removecart/{{$item->cartid}}" type="button" class="card-link-secondary small text-uppercase mr-3"><i
@@ -101,7 +116,7 @@ $total=product_Controller::cartitemtotal();
        
       </div>
       
-      <!-- Card -->
+    
 
       <!-- Card -->
       <div class="mb-3">
@@ -212,6 +227,15 @@ $total=product_Controller::cartitemtotal();
 
 </section>
 <!--Section: Block Content-->
+
+<!-- <script type="text/javascript">
+
+var pricewithqty = document.getElementsByClassName('pricewithqty').value;
+var su=su+pricewithqty;
+document.write(su);
+
+
+</script> -->
 
 
 

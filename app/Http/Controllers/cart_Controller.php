@@ -13,4 +13,10 @@ class cart_Controller extends Controller
         carts::where('id',$crtid)->delete();
         return redirect('/showcart')->with('delete', 'Your Product Has Been Succcessfully Deleted From Cart.');
     }
+
+    function updatecartqty($id=null,$quantity=null)
+    {
+       DB::table('carts')->where('id',$id)->increment('quantity',$quantity);
+       return redirect('/showcart');
+    }
 }
