@@ -98,7 +98,9 @@
 }
 </style>
 
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
 
@@ -113,14 +115,15 @@
         {{ session('added') }}
     </div>
 @endif
-
+<?php $id=0;
+?>
 
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
   <h3 class="w3-bar-item">Category</h3>
   
  
   @foreach ($cat as $cato)
-  <a href="productbycat/{{$cato->cat_name}}" class="w3-bar-item w3-button">{{$cato->cat_name}}</a>&nbsp&nbsp
+  <a href="productbycat/{{$cato->cat_name}}" class="w3-bar-item w3-button">{{$cato->cat_name}}<span class="badge">2</span></a>&nbsp&nbsp
   @endforeach
 
   
@@ -178,10 +181,11 @@
                              </tr>
                            </thead>
 
+                        
                            @foreach ($products as $item)
                                   <tbody>
                              <tr class="r1">
-                               <td class="d1">{{$item['id']}}</td>
+                               <td class="d1">{{$id+1}}</td>
                                <td class="d1">{{$item['product_name']}}</td>
                                <td class="d1">{{$item['price']}}</td>
                                <td class="d1">{{$item['description']}}</td>
@@ -201,6 +205,7 @@
 
                              </tr>
                              </tbody>
+                             <?php $id++; ?> 
                              @endforeach
 
                             
@@ -219,6 +224,10 @@
                            <div>
                              {!! $products->appends(['sort' => 'department'])->links() !!}
                             </div>
+
+
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </body>
 </html>
 
