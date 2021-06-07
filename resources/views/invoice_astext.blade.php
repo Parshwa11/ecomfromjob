@@ -4,6 +4,8 @@ use App\Http\Controllers\product_Controller;
 $cartitemscount=product_Controller::cartitem();
 $cartitemstotal=product_Controller::cartitemtotal();
 $cart_item_total_with_gst=product_Controller::cart_item_total_with_gst();
+$price_with_qty_increase=product_Controller::price_with_qty_increase();
+
 
 ?>
 
@@ -66,6 +68,18 @@ $cart_item_total_with_gst=product_Controller::cart_item_total_with_gst();
                 @endforeach
               </tr>
               <tr>
+                <td><b>Qty</b> </td>
+                @foreach ($cartitems as $item)
+                <td>{{$item->quantity}} N</td>
+                @endforeach
+              </tr>
+              <tr>
+                <td><b>SuTotal</b> </td>
+                @foreach ($cartitems as $item)
+                <td>{{ $old_section = ($item->quantity * $item->price)}}</td>
+                @endforeach
+              </tr>
+              <tr>
                 <td>Catalogue No. </td>
                 @foreach ($cartitems as $item)
                 <td>{{$item->token}}</td>
@@ -73,7 +87,7 @@ $cart_item_total_with_gst=product_Controller::cart_item_total_with_gst();
               </tr>
               <tr>
                 <td><strong>Quantity : {{$cartitemscount}}</strong></td>
-                <b><td><strong>SubTotal : {{$cartitemstotal}} ₹</strong></td></b>
+                <b><td><strong>SubTotal : {{$price_with_qty_increase}} ₹</strong></td></b>
                 <td><i><strong>Amount To COD (GST Included):{{$cart_item_total_with_gst}} ₹</strong></i></td>
               </tr>
             </tbody>

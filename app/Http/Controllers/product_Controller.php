@@ -51,18 +51,41 @@ class product_Controller extends Controller
 
     function addtocart(Request $req)
     {
+
+            // $cartitemexist= DB::table('carts')
+            // ->where('userid',$userid)
+            // ->where('token',$req->token)
+            // ->count();
+            
+            
+
+
         // $userid = $req->session()->get('userid');
         if( $req->session()->get('userid'))
         {
 
-        $cart=new carts;
-        $cart->token=$req->token;
-        $cart->userid=$req->session()->get('userid');
-        $cart->quantity=1;
+            $cartitemexist= DB::table('carts')
+            ->where('userid',$req->session()->get('userid'))
+            ->where('token',$req->token)
+            ->count();
 
-        $cart->save();
+            if($cartitemexist>0)
+            {
+                return redirect('products')->with('alreadyexist', 'Item Already Exist In Cart.');
+            }
 
-        return redirect('showcart');
+            else{
+
+                $cart=new carts;
+                $cart->token=$req->token;
+                $cart->price=$req->price;
+                $cart->userid=$req->session()->get('userid');
+                $cart->quantity=1;
+
+                $cart->save();
+
+                return redirect('products')->with('added', 'Item Successfully Added In Cart.');
+            }
         }
         else
         {
@@ -91,34 +114,46 @@ class product_Controller extends Controller
     static function cart_item_total_with_gst()
     {
         $userid = Session::get('userid');
-        $carttotalwithgst= DB::table('carts')
-        ->join('products', 'carts.token', '=', 'products.token')
-        ->where('userid', $userid)
-            ->sum('products.price')
-            ;
+        // $carttotalwithgst= DB::table('carts')
+        // ->join('products', 'carts.token', '=', 'products.token')
+        // ->where('userid', $userid)
+        //     ->sum('products.price')
+        //     ;
 
-        return $carttotalwithgst*0.12+$carttotalwithgst;
+        // return $carttotalwithgst*0.12+$carttotalwithgst;
+
+        
+        $carttotalwithgst= DB::table('carts')  
+        ->where('userid',$userid)
+           ->sum(DB::raw('price * quantity'));
+
+           return  $carttotalwithgst*0.12+$carttotalwithgst;
     }
 
 
     static function price_with_qty_increase()
     {
         $userid = Session::get('userid');
-        $qty= DB::table('carts')
-        ->join('products', 'carts.token', '=', 'products.token')
-        ->where('userid', $userid)
-        ->get('carts.quantity')
-            ;
+        // $qty= DB::table('carts')
+        // ->join('products', 'carts.token', '=', 'products.token')
+        // ->where('userid', $userid)
+        // ->get('carts.quantity')
+        //     ;
 
-            $qty_mul_price= DB::table('carts')
-        ->join('products', 'carts.token', '=', 'products.token')
-        ->where('userid', $userid)
-        ->get('products.price')
-            ;
+        //     $qty_mul_price= DB::table('carts')
+        // ->join('products', 'carts.token', '=', 'products.token')
+        // ->where('userid', $userid)
+        // ->get('products.price')
+        //     ;
 
-            $test= $qty * $qty_mul_price;
+        //     $test= $qty * $qty_mul_price;
 
-        return $test ;
+        // return $test ;
+
+        return DB::table('carts')  
+        ->where('userid',$userid)
+           ->sum(DB::raw('price * quantity'));
+           
     }
 
 
@@ -130,6 +165,9 @@ class product_Controller extends Controller
     function showcart(Request $req)
     {
         $userid = $req->session()->get('userid');
+
+        
+
         $cartitems = DB::table('carts')
             ->join('products', 'carts.token', '=', 'products.token')
             ->where('carts.userid',$userid)

@@ -21,7 +21,15 @@ class UsersExport implements FromCollection
         ->join('products', 'carts.token', '=', 'products.token')
         ->where('carts.userid',$userid)
         
-        ->select('products.id','products.product_name','products.price' , 'products.description','products.token')
+        ->select('products.id','products.product_name','products.price' , 'products.description','products.token','carts.quantity')
+        // ->sum(DB::raw('carts.price * carts.quantity'))
         ->get();
+
+        // return DB::table('carts')  
+        // ->where('userid',$userid)
+        // ->sum(DB::raw('price * quantity'))
+        // ->get();
+
+
     }
 }

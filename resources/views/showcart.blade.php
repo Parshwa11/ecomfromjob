@@ -5,7 +5,7 @@ $cartitemscount=product_Controller::cartitem();
 $cartitemstotal=product_Controller::cartitemtotal();
 $cart_item_total_with_gst=product_Controller::cart_item_total_with_gst();
 
-// $price_with_qty_increase=product_Controller::price_with_qty_increase();
+$price_with_qty_increase=product_Controller::price_with_qty_increase();
 
 $total=product_Controller::cartitemtotal();
 
@@ -23,6 +23,8 @@ $total=product_Controller::cartitemtotal();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous">
 </head>
 <body>
+
+<a href="products">back to shooping </a>
 
 
 @if (session('delete'))
@@ -52,6 +54,7 @@ $total=product_Controller::cartitemtotal();
         <div class="pt-4 wish-list">
 
           <h5 class="mb-4">Cart (<span>{{$cartitemscount}}</span> items)</h5>
+          <!-- <h5 class="mb-4">Test (<span>{{$price_with_qty_increase}}</span> )</h5> -->
           
 
           @foreach ($cartitems as $item)
@@ -93,9 +96,9 @@ $total=product_Controller::cartitemtotal();
 </div>
 
                 </div> 
-                {{ $old_section = ($item->quantity * $item->price)}}
+                <!-- {{ $old_section = ($item->quantity * $item->price)}} -->
                 <!-- {{ $section = ($old_section + $old_section)}} -->
-                <input type="text" class="pricewithqty" value="{{$old_section}}" >
+                <input type="text" class="pricewithqty" placeholder=" {{ $old_section = ($item->quantity * $item->price)}}" >
              
                
 
@@ -166,7 +169,7 @@ $total=product_Controller::cartitemtotal();
           <ul class="list-group list-group-flush">
             <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
               Temporary amount
-              <span>{{$cartitemstotal}} ₹</span>
+              <span>{{$price_with_qty_increase}} ₹</span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
               Shipping

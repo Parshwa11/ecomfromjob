@@ -102,12 +102,28 @@
 </head>
 <body>
 
+@if (session('alreadyexist'))
+    <div class="alert alert-success">
+        {{ session('alreadyexist') }}
+    </div>
+@endif
+
+@if (session('added'))
+    <div class="alert alert-success">
+        {{ session('added') }}
+    </div>
+@endif
+
 
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
   <h3 class="w3-bar-item">Category</h3>
+  
+ 
   @foreach ($cat as $cato)
   <a href="productbycat/{{$cato->cat_name}}" class="w3-bar-item w3-button">{{$cato->cat_name}}</a>&nbsp&nbsp
   @endforeach
+
+  
 </div>
 
 
@@ -150,6 +166,7 @@
           </div>
           <button type="submit" class="btn btn-default">Search</button>
         </form>
+        <a href="showcart"><button class='btn btn-success' style="float: right;"> CART</button></a>
                             <table class="table table-hover text-nowrap" >
                             <thead>
                              <tr>
@@ -178,6 +195,7 @@
                                <td> <form action="addtocart" method="POST">
                                 @csrf
                                   <input type="hidden" value="{{$item['token']}}" name="token" >
+                                  <input type="hidden" value="{{$item['price']}}" name="price" >
                                   <button class="btn btn-primary">add to cart</button>
                                 </form></td>
 

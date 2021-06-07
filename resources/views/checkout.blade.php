@@ -176,7 +176,7 @@ span.price {
     <div class="container">
       <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>{{$cartitemscount}}</b></span></h4>
       @foreach($cartitems as $items)
-      <p><a href="#">{{$items->product_name}}</a>  <span><a href="removecart/{{$items->cartid}}" type="button" ><i class="fa fa-trash" aria-hidden="true"></i></span></a>  <span class="price">{{$items->price}} ₹</span> </p>
+      <p><a href="#">{{$items->product_name}}</a> <span>{{$items->quantity}}</span> <span><a href="removecart/{{$items->cartid}}" type="button" ><i class="fa fa-trash" aria-hidden="true"></i></span></a>  <span class="price">{{ $old_section = ($items->quantity * $items->price)}} ₹</span> </p>
     
     @endforeach
       <hr>

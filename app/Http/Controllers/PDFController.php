@@ -21,7 +21,7 @@ class PDFController extends Controller
             ->join('products', 'carts.token', '=', 'products.token')
             ->where('carts.userid',$userid)
             
-            ->select('products.product_name','products.token', 'products.price', 'products.id','products.description','products.image','carts.id as cartid')
+            ->select('products.product_name','products.token', 'products.price', 'products.id','products.description','products.image','carts.id as cartid','carts.quantity')
             ->get();
         // $data = products::all();
 
