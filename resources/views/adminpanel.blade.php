@@ -1,3 +1,11 @@
+if($request->session()->has('user'))
+{
+  
+}
+
+
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -27,7 +35,7 @@
 		
 		<div class="wrapper d-flex align-items-stretch">
 			<nav id="sidebar" class="active">
-				<h1><a href="/" class="logo">Admin</a></h1>
+
         <ul class="list-unstyled components mb-5">
           <li class="active">
             <a href="/"><span class="fa fa-home"></span> Home</a>
@@ -75,6 +83,8 @@
                                <th>description</th>
                                <th>Picture</th>
                                <th>Action</th>
+                               <th></th>
+                               <th></th>
                              </tr>
                            </thead>
 

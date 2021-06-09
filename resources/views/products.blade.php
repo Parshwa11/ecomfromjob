@@ -1,65 +1,7 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-@foreach ($products as $item)
-<tr>
-   <td>{{$item['product_name']}}</td>
-   <td>{{$item['price']}}</td>
-   <td>{{$item['description']}}</td>
- 
+@extends('masterheader')
+@section('about','about')
+@section('content')
 
-   
-</tr>
-@endforeach
-
-
-
-<div class="categories-shop">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="shop-cat-box">
-                        <img class="img-fluid" src="images/t-shirts-img.jpg" alt="" />
-                        <a class="btn hvr-hover" href="#">{{$item['product_name']}}</a>
-                    </div>
-                    <div class="shop-cat-box">
-                        <img class="img-fluid" src="images/shirt-img.jpg" alt="" />
-                        <a class="btn hvr-hover" href="#">Shirt</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="shop-cat-box">
-                        <img class="img-fluid" src="images/wallet-img.jpg" alt="" />
-                        <a class="btn hvr-hover" href="#">Wallet</a>
-                    </div>
-                    <div class="shop-cat-box">
-                        <img class="img-fluid" src="images/women-bag-img.jpg" alt="" />
-                        <a class="btn hvr-hover" href="#">Bags</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="shop-cat-box">
-                        <img class="img-fluid" src="images/shoes-img.jpg" alt="" />
-                        <a class="btn hvr-hover" href="#">Shoes</a>
-                    </div>
-                    <div class="shop-cat-box">
-                        <img class="img-fluid" src="images/women-shoes-img.jpg" alt="" />
-                        <a class="btn hvr-hover" href="#">Women Shoes</a>
-                    </div> 
-                </div>
-            </div>
-        </div>
-    </div>
-
-</body>
-</html> -->
 
 
 
@@ -101,6 +43,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/12.0.0/nouislider.min.css" integrity="sha512-kSH0IqtUh1LRE0tlO8dWN7rbmdy5cqApopY6ABJ4U99HeKulW6iKG5KgrVfofEXQOYtdQGFjj2N/DUBnj3CNmQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
@@ -119,15 +62,27 @@
 ?>
 
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
-  <h3 class="w3-bar-item">Category</h3>
+ 
   
  
-  @foreach ($cat as $cato)
+  <!-- @foreach ($cat as $cato)
   <a href="productbycat/{{$cato->cat_name}}" class="w3-bar-item w3-button">{{$cato->cat_name}}<span class="badge">2</span></a>&nbsp&nbsp
-  @endforeach
+  @endforeach -->
+
+
+
+                                           
+                                            <select onchange="location = this.value;">
+                                              
+                                              <option value="0" style>Select Category:</option> 
+                                              @foreach($cat as $cato)        
+                                                 <option value="productbycat/{{$cato->cat_name}}">{{$cato->cat_name}}</option></a>
+                                                @endforeach
+                                            </select>
+                                        </div>
 
   
-</div>
+
 
 
 
@@ -163,13 +118,33 @@
 
                             <div class="card-body table-responsive p-0"> -->
 
-            <form action="/search" class="navbar-form navbar-left">
+            <form action="/search" class="navbar-form navbar-right">
           <div class="form-group">
             <input type="text" name="query" class="form-control search-box" placeholder="Search">
           </div>
           <button type="submit" class="btn btn-default">Search</button>
         </form>
-        <a href="showcart"><button class='btn btn-success' style="float: right;"> CART</button></a>
+
+<!-- 
+        <form action="/search" class="navbar-form navbar-left">
+          <div class="form-group">
+            <input type="text" name="query" class="form-control search-box" placeholder="Search">
+          </div>
+          <button type="submit" class="btn btn-default">Search</button>
+        </form> -->
+
+
+      <div class="col-md-12 mb-3">
+      <a href="{{URL::current()}}">Lowest to Highest</a>&nbsp&nbsp|
+      <a href="">Highest to lowest  </a>&nbsp&nbsp|
+      <a href="">Newest </a>&nbsp&nbsp|
+      <a href="">Popularity  </a>
+      
+      
+      </div>
+
+
+        <a href="showcart"><button class='btn btn-success' style="float: right;"> <i class="fas fa-shopping-cart"></i></button></a>
                             <table class="table table-hover text-nowrap" >
                             <thead>
                              <tr>
@@ -228,6 +203,63 @@
 
                             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/12.0.0/nouislider.min.js" integrity="sha512-6vo59lZMHB6GgEySnojEnfhnugP7LR4qm6akxptNOw/KW+i9o9MK4Gaia8f/eJATjAzCkgN3CWlIHWbVi2twpg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+  <footer>
+        <div class="footer-main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="footer-widget">
+                            <h4>About ThewayShop</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                </p>
+                            <ul>
+                                <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="footer-link">
+                            <h4>Information</h4>
+                            <ul>
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Customer Service</a></li>
+                                <li><a href="#">Our Sitemap</a></li>
+                                <li><a href="#">Terms &amp; Conditions</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Delivery Information</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="footer-link-contact">
+                            <h4>Contact Us</h4>
+                            <ul>
+                                <li>
+                                    <p><i class="fas fa-map-marker-alt"></i>Address: Michael I. Days 3756 <br>Preston Street Wichita,<br> KS 67213 </p>
+                                </li>
+                                <li>
+                                    <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+1-888705770">+1-888 705 770</a></p>
+                                </li>
+                                <li>
+                                    <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">contactinfo@gmail.com</a></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+  @endsection
 </body>
 </html>
 

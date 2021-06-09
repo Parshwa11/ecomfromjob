@@ -45,6 +45,7 @@ Route::get('invoice_astext', function () {
 Route::get('checkout','checkout_Controller@checkout');
 
 Route::get('search','product_Controller@search');
+Route::get('search','product_Controller@searchbyprice');
 
 Route::get('contact', function () {
     return view('contact');
@@ -95,6 +96,14 @@ Route::get('/login', function () {
     return view('login');
 });
 
+
+Route::get('/masterheader', function () {
+    return view('masterheader');
+});
+
+Route::get('/footer', function () {
+    return view('footer');
+});
 
 
 // View::composer(['*'], function ($view) {

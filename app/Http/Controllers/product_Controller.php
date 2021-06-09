@@ -38,6 +38,15 @@ class product_Controller extends Controller
         ->get();
         return view('search',['products'=>$data]);
     }
+
+    function searchbyprice(Request $req)
+    {
+        $data= Products::
+        where('price', 'like', '%'.$req->input('query').'%')
+        ->orWhere('description','LIKE','%'.$req->input('query').'%')
+        ->get();
+        return view('search',['products'=>$data]);
+    }
     
     function bycategory(Request $req,$cat_name)
     {

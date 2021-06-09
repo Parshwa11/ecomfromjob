@@ -17,6 +17,19 @@ class adminpanel_Controller extends Controller
 
     function addproduct(Request $request)
     {
+
+        $request->validate([
+
+            'product_name'=>'required',
+            'price'=>'numeric',
+            'description'=>'required|max:100|min:2',
+            'category'=>'required',
+            'file'=>'required'
+
+            
+
+        ]);
+
         $file=$request->file('file');
         $extension=$file->getClientOriginalExtension();
         $filename=time().'.'.$extension;
