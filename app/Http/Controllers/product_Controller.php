@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\products;
 use App\Models\carts;
 use Illuminate\Http\Request;
+use PDF;
 use App\Functions\functions;
 use Illuminate\Support\Facades\Session;
 
@@ -14,10 +15,10 @@ class product_Controller extends Controller
 {
     // return product::all();
 
-//     function __construct(Request $req) {
-//         global $c;
-//        $c=$req->session()->get('userid');
-//   }
+    function __construct(Request $req) {
+        global $c;
+       $c=$req->input('query');
+  }
 
 
     function index()
@@ -32,21 +33,71 @@ class product_Controller extends Controller
 
     function search(Request $req)
     {
+        $searched=$req->input('query');
         $data= Products::
         where('product_name', 'like', '%'.$req->input('query').'%')
         ->orWhere('description','LIKE','%'.$req->input('query').'%')
         ->get();
-        return view('search',['products'=>$data]);
+        return view('search',['products'=>$data])->with(['searched'=>$searched]);
+
+
+        // view()->share('data',$data);   
+        // $pdf = PDF::loadView('searchedpdf',$data);
+        
+    
+        // return $pdf->download('searchedpdf_file.pdf');
+
     }
 
-    function searchbyprice(Request $req)
+    function pdfOfSearched(Request $req)
     {
+        $searched=$req->input('searchedq');
         $data= Products::
-        where('price', 'like', '%'.$req->input('query').'%')
-        ->orWhere('description','LIKE','%'.$req->input('query').'%')
+        where('product_name', 'like', '%'. $searched .'%')
+        ->orWhere('description','LIKE','%'. $searched .'%')
         ->get();
-        return view('search',['products'=>$data]);
+       view()->share('data',$data);   
+        $pdf = PDF::loadView('searchedpdf',$data);
+        
+    
+        return $pdf->download('searchedpdf_file.pdf');
     }
+
+    function pdfOfPriceFilterSearched(Request $req)
+    {
+        $start=$req->input('starts');
+        $end=$req->input('ends');
+
+        $data = Products::whereBetween('price',[$start,$end])->get();
+
+        view()->share('data',$data);   
+        $pdf = PDF::loadView('pdfofpricefiltered',$data);
+        
+    
+        return $pdf->download('pdfofpricefilteredpdf_file.pdf');
+
+    }
+
+    function productbyprice(Request $req)
+    {
+        $start=$req->input('start');
+        $end=$req->input('end');
+
+        $products = Products::whereBetween('price',[$start,$end])->get();
+        return view('productbyprice',['products'=>$products])->with(['start'=>$start,'end'=>$end]);
+
+    }
+
+    
+
+    // function searchbyprice(Request $req)
+    // {
+    //     $data= Products::
+    //     where('price', 'like', '%'.$req->input('query').'%')
+    //     ->orWhere('description','LIKE','%'.$req->input('query').'%')
+    //     ->get();
+    //     return view('search',['products'=>$data]);
+    // }
     
     function bycategory(Request $req,$cat_name)
     {
@@ -165,6 +216,8 @@ class product_Controller extends Controller
            
     }
 
+    
+
 
 
 
@@ -186,6 +239,22 @@ class product_Controller extends Controller
 
 
             return view('showcart',['cartitems'=>$cartitems]);
+
+//             E.g. in the boot() method of your AppServiceProvider you would have something like:
+
+// public function boot()
+// {
+//     view()->composer(['home', 'profile'], function ($view) {
+
+//         $notifications = \App\Notification::all(); //Change this to the code you would use to get the notifications
+
+//         $view->with('notifications', $notifications);
+//     });
+// }
+
+
+
+
             // return view('checkout',['cartitems'=>$cartitems]);
 
 

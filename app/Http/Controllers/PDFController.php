@@ -34,14 +34,19 @@ class PDFController extends Controller
     
         return $pdf->download('pdf_file.pdf');
     }
+
+
+
+    public function productspdf(Request $request)
+    {
+       
+        
+        $data=products::all();
+            view()->share('data',$data);   
+        $pdf = PDF::loadView('productpdf',$data);
+        
+    
+        return $pdf->download('productspdf_file.pdf');
+    }
 }
 
-
-// $data = Employee::all();
-
-// // share data to view
-// view()->share('employee',$data);
-// $pdf = PDF::loadView('pdf_view', $data);
-
-// // download PDF file with download method
-// return $pdf->download('pdf_file.pdf');

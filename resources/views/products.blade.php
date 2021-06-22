@@ -61,6 +61,25 @@
 <?php $id=0;
 ?>
 
+<div class="container">
+  <div class="row">
+  <form method="post" action="productbyprice">
+  @csrf
+    <div class="col">
+    Price Filter:
+
+    <input  name="start" placeholder="Price From" type="number"> 
+    <input name="end" placeholder="Price to" type="number"> 
+    <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+    </form>
+    
+  </div>
+</div>
+
+
+ 
+
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
  
   
@@ -199,6 +218,7 @@
                            <div>
                              {!! $products->appends(['sort' => 'department'])->links() !!}
                             </div>
+                            <a class="btn btn-primary" href="{{ URL::to('generate-pdf-products') }}">Export to PDF</a>
 
 
                             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

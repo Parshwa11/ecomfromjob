@@ -25,6 +25,7 @@ class admin_Controller extends Controller
             return redirect('admin')->with('status', 'Email or Password is Wrong Please Check!!.');
         }
         else{
+         
             $req->session()->put('user',$user);
             return redirect('/adminpanel');
 

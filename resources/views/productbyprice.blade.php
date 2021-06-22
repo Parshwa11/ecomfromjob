@@ -4,14 +4,10 @@
       <title>Searched</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="undefined" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
    </head>
    <body>
-   @if (session('alert'))
-    <div class="alert alert-success">
-        {{ session('alert') }}
-    </div>
-@endif
+
       
       <div id="content" class="p-4 p-md-5">
          <section class="content">
@@ -46,16 +42,16 @@
 
                
             </table>
-            
-            <form method="post" action="generate-pdf-searched" class="navbar-form navbar-right">
+
+            <form method="post" action="generate-pdf-pricefilter" class="navbar-form navbar-right">
             @csrf
           <div class="form-group">
-          <input type="hidden" name="searchedq" value="{{$searched}}">
+          <input type="hidden" name="starts" value="{{$start}}">
+          <input type="hidden" name="ends" value="{{$end}}">
           </div>
           <button type="submit" class="btn btn-primary">Export to PDF</button>
         </form>
-            
-            <!-- <a class="btn btn-primary" href="{{ URL::to('generate-pdf-searched') }}">Export to PDF</a>        -->
+
       </div>
       </div>
       </div>   

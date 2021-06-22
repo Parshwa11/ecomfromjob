@@ -45,7 +45,7 @@ Route::get('invoice_astext', function () {
 Route::get('checkout','checkout_Controller@checkout');
 
 Route::get('search','product_Controller@search');
-Route::get('search','product_Controller@searchbyprice');
+// Route::get('search','product_Controller@searchbyprice');
 
 Route::get('contact', function () {
     return view('contact');
@@ -64,8 +64,17 @@ Route::get('addproduct', function () {
 });
 
 Route::get('export', 'excel_Controller@export');
+// Route::post('adminlogin',['uses' => admin_Controller@login, 'middleware' => 'AuthResource']);
+
 
 Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
+Route::get('generate-pdf-products', [PDFController::class, 'productspdf']);
+// Route::get('generate-pdf-searched', [product_Controller::class, 'search']);
+Route::post('generate-pdf-searched','product_Controller@pdfOfSearched');
+Route::post('generate-pdf-pricefilter','product_Controller@pdfOfPriceFilterSearched');
+
+Route::post('productbyprice','product_Controller@productbyprice');
+
 Route::get('pdfy','pdfy_Controller@hello');
 Route::post('signed','signup_Controller@signed');
 Route::get('products','product_Controller@index');

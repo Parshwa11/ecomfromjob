@@ -1,8 +1,3 @@
-if($request->session()->has('user'))
-{
-  
-}
-
 
 
 
@@ -65,15 +60,7 @@ if($request->session()->has('user'))
       <div id="content" class="p-4 p-md-5">
 
       <section class="content">
-                            <!-- <div class="pull-right">
-                                {{ $products->links() }}
-                            </div> -->
-                             <!-- <div class="row">
-                            <div class="col-12">
-                              <div class="card">
-                               
-
-                            <div class="card-body table-responsive p-0"> -->
+                          
                             <table class="table table-hover text-nowrap" >
                             <thead>
                              <tr>
@@ -132,9 +119,9 @@ if($request->session()->has('user'))
                               <!-- /.card -->
                            </section>
 
-                           <div>
+                           <!-- <div>
                              {!! $products->appends(['sort' => 'department'])->links() !!}
-                            </div>
+                            </div> -->
         
         
       </div>
