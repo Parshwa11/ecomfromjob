@@ -126,20 +126,11 @@
 </div>
 @endforeach -->
 <section class="content">
-                            <!-- <div class="pull-right">
-                                {{ $products->links() }}
-                            </div> -->
-                             <!-- <div class="row">
-                            <div class="col-12">
-                              <div class="card">
-                               
-                               
-
-                            <div class="card-body table-responsive p-0"> -->
+                          
 
             <form action="/search" class="navbar-form navbar-right">
           <div class="form-group">
-            <input type="text" name="query" class="form-control search-box" placeholder="Search">
+            <input type="text" name="q" class="form-control search-box" placeholder="Search">
           </div>
           <button type="submit" class="btn btn-default">Search</button>
         </form>
@@ -215,10 +206,8 @@
                               <!-- /.card -->
                            </section>
 
-                           <div>
-                             {!! $products->appends(['sort' => 'department'])->links() !!}
-                            </div>
-                            <a class="btn btn-primary" href="{{ URL::to('generate-pdf-products') }}">Export to PDF</a>
+                           <!--  -->
+                            <a class="btn btn-primary" href="generate-pdf-products/{{ $searched or 'Default' }}">Export to PDF</a>
                             <span data-href="tasks" id="export" class="btn btn-success" onclick="exportTasks(event.target);">Export As CSV</span>
 
 

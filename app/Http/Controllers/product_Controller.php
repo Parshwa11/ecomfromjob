@@ -15,30 +15,33 @@ class product_Controller extends Controller
 {
     // return product::all();
 
-    function __construct(Request $req) {
-        global $c;
-       $c=$req->input('query');
-  }
+//     function __construct(Request $req) {
+//         global $c;
+//        $c=$req->input('query');
+//   }
 
 
     function index()
     {
-        $cat = DB::select('select * from categories');
+        // $cat = DB::select('select * from categories');
      
-
+        
         $data=products::paginate(5);
-        return view('products',['products'=>$data],['cat'=>$cat]);
+        // return view('products',['products'=>$data],['cat'=>$cat]);
+        return view('products',['products'=>$data]);
         // return view('adminpanel',['products'=>$data]);
     }
 
     function search(Request $req)
     {
-        $searched=$req->input('query');
+        
+        $searched=$req->input('q');
+        // dd($searched);
         $data= Products::
-        where('product_name', 'like', '%'.$req->input('query').'%')
-        ->orWhere('description','LIKE','%'.$req->input('query').'%')
+        where('product_name', 'like', '%'.$req->input('q').'%')
+        ->orWhere('description','LIKE','%'.$req->input('q').'%')
         ->get();
-        return view('search',['products'=>$data])->with(['searched'=>$searched]);
+        return view('products',['products'=>$data])->with(['searched'=>$searched]);
 
 
         // view()->share('data',$data);   
@@ -51,6 +54,9 @@ class product_Controller extends Controller
 
     function pdfOfSearched(Request $req)
     {
+
+        // $searched = $req->query;
+        
         $searched=$req->input('searchedq');
         $data= Products::
         where('product_name', 'like', '%'. $searched .'%')
