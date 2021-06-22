@@ -52,6 +52,15 @@
           <button type="submit" class="btn btn-primary">Export to PDF</button>
         </form>
 
+        <form method="post" action="tasks2" class="navbar-form navbar-right">
+            @csrf
+          <div class="form-group">
+          <input type="hidden" name="starts" value="{{$start}}">
+          <input type="hidden" name="ends" value="{{$end}}">
+          </div>
+          <button type="submit" class="btn btn-success">Export to CSV</button>
+        </form>
+
       </div>
       </div>
       </div>   

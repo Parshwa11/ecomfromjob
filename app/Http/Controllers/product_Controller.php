@@ -63,6 +63,8 @@ class product_Controller extends Controller
         return $pdf->download('searchedpdf_file.pdf');
     }
 
+  
+
     function pdfOfPriceFilterSearched(Request $req)
     {
         $start=$req->input('starts');

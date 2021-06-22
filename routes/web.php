@@ -66,7 +66,9 @@ Route::get('addproduct', function () {
 Route::get('export', 'excel_Controller@export');
 // Route::post('adminlogin',['uses' => admin_Controller@login, 'middleware' => 'AuthResource']);
 
-
+Route::get('tasks', 'admin_Controller@exportCsv');
+Route::post('tasks1', 'admin_Controller@csvOfSearched');
+Route::post('tasks2', 'admin_Controller@csvOfSearchedByPrice');
 Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
 Route::get('generate-pdf-products', [PDFController::class, 'productspdf']);
 // Route::get('generate-pdf-searched', [product_Controller::class, 'search']);

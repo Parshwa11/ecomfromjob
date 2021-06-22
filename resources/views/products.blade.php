@@ -70,7 +70,7 @@
 
     <input  name="start" placeholder="Price From" type="number"> 
     <input name="end" placeholder="Price to" type="number"> 
-    <button type="submit" class="btn btn-primary">Search</button>
+    <button type="submit" class="btn btn-success btn-sm">Search</button>
     </div>
     </form>
     
@@ -219,6 +219,8 @@
                              {!! $products->appends(['sort' => 'department'])->links() !!}
                             </div>
                             <a class="btn btn-primary" href="{{ URL::to('generate-pdf-products') }}">Export to PDF</a>
+                            <span data-href="tasks" id="export" class="btn btn-success" onclick="exportTasks(event.target);">Export As CSV</span>
+
 
 
                             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -280,6 +282,13 @@
         </div>
     </footer>
   @endsection
+
+  <script>
+   function exportTasks(_this) {
+      let _url = $(_this).data('href');
+      window.location.href = _url;
+   }
+</script>
 </body>
 </html>
 

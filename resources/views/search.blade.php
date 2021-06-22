@@ -7,6 +7,10 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="undefined" crossorigin="anonymous">
    </head>
    <body>
+<style>
+
+</style>
+
    @if (session('alert'))
     <div class="alert alert-success">
         {{ session('alert') }}
@@ -46,14 +50,30 @@
 
                
             </table>
+
+
+            <div class="row">
+            
             
             <form method="post" action="generate-pdf-searched" class="navbar-form navbar-right">
             @csrf
           <div class="form-group">
           <input type="hidden" name="searchedq" value="{{$searched}}">
           </div>
-          <button type="submit" class="btn btn-primary">Export to PDF</button>
+          <button type="submit" class="btn btn-primary" data-inline="true">Export to PDF</button>
+         
         </form>
+
+        <form method="post" action="tasks1" class="navbar-form navbar-right">
+            @csrf
+          <div class="form-group">
+          <input type="hidden" name="searchedq" value="{{$searched}}">
+          </div>
+          <button type="submit" class="btn btn-success" data-inline="true">Export to CSV</button>
+         
+        </form>
+        </div>
+        
             
             <!-- <a class="btn btn-primary" href="{{ URL::to('generate-pdf-searched') }}">Export to PDF</a>        -->
       </div>
@@ -63,7 +83,12 @@
       </div>
       </div>
 
-
+      <!-- <script>
+   function exportTasks(_this) {
+      let _url = $(_this).data('href');
+      window.location.href = _url;
+   }
+</script> -->
 
 
    </body>
