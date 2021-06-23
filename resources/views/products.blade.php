@@ -208,7 +208,7 @@
                            </section>
                         
 
-                            <a class="btn btn-primary" href="generate-pdf-products/{{$searched}}">Export to PDF</a>
+                            <a class="btn btn-primary" href="generate-pdf-products">Export to PDF</a>
                             <span data-href="tasks" id="export" class="btn btn-success" onclick="exportTasks(event.target);">Export As CSV</span>
                             
 

@@ -70,7 +70,7 @@ Route::get('tasks', 'admin_Controller@exportCsv');
 Route::post('tasks1', 'admin_Controller@csvOfSearched');
 Route::post('tasks2', 'admin_Controller@csvOfSearchedByPrice');
 Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
-Route::get('generate-pdf-products/{searched}', [PDFController::class, 'productspdf']);
+Route::get('generate-pdf-products', [PDFController::class, 'productspdf']);
 // Route::get('generate-pdf-searched', [product_Controller::class, 'search']);
 Route::post('generate-pdf-searched','product_Controller@pdfOfSearched');
 Route::post('generate-pdf-pricefilter','product_Controller@pdfOfPriceFilterSearched');

@@ -37,25 +37,25 @@ class PDFController extends Controller
 
 
 
-    public function productspdf( $searched, Request $request)
+    public function productspdf( Request $request)
     {
         // $str = "";
         // if ($request->has('q')) {
         //     $str = $request->q;
         // }
         // $searched = $request->q;
-        // $data=products::all();
-        //     view()->share('data',$data);   
-        // $pdf = PDF::loadView('productpdf',$data);
-        $data= Products::
-        where('product_name', 'like', '%'. $searched .'%')
-        ->orWhere('description','LIKE','%'. $searched .'%')
-        ->get();
-       view()->share('data',$data);   
-        $pdf = PDF::loadView('searchedpdf',$data);
+        $data=products::all();
+            view()->share('data',$data);   
+        $pdf = PDF::loadView('productpdf',$data);
+    //     $data= Products::
+    //     where('product_name', 'like', '%'. $searched .'%')
+    //     ->orWhere('description','LIKE','%'. $searched .'%')
+    //     ->get();
+    //    view()->share('data',$data);   
+    //     $pdf = PDF::loadView('searchedpdf',$data);
         
     
-        // return $pdf->download('searchedpdf_file.pdf');
+        return $pdf->download('searchedpdf_file.pdf');
         
     
         return $pdf->download('productspdf_file.pdf');

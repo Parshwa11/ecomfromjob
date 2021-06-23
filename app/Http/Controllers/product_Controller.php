@@ -24,11 +24,12 @@ class product_Controller extends Controller
 function index()
 {
     $cat = DB::select('select * from categories');
-    $searched="hello";
+    // $searched="hello";
 
     $data=products::paginate(5);
-    return view('products',['products'=>$data],['cat'=>$cat])->with(['searched'=>$searched]);
+    return view('products',['products'=>$data],['cat'=>$cat]);
     // return view('adminpanel',['products'=>$data]);
+    // ->with(['searched'=>$searched])
 }
 
 function search(Request $req)
@@ -38,7 +39,7 @@ function search(Request $req)
     where('product_name', 'like', '%'.$req->input('query').'%')
     ->orWhere('description','LIKE','%'.$req->input('query').'%')
     ->get();
-    return view('products',['products'=>$data])->with(['searched'=>$searched]);
+    return view('search',['products'=>$data])->with(['searched'=>$searched]);
 
 
     // view()->share('data',$data);   
