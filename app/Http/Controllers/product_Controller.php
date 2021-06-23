@@ -21,36 +21,33 @@ class product_Controller extends Controller
 //   }
 
 
-    function index()
-    {
-        // $cat = DB::select('select * from categories');
-     
-        
-        $data=products::paginate(5);
-        // return view('products',['products'=>$data],['cat'=>$cat]);
-        return view('products',['products'=>$data]);
-        // return view('adminpanel',['products'=>$data]);
-    }
+function index()
+{
+    $cat = DB::select('select * from categories');
+    $searched="hello";
 
-    function search(Request $req)
-    {
-        
-        $searched=$req->input('q');
-        // dd($searched);
-        $data= Products::
-        where('product_name', 'like', '%'.$req->input('q').'%')
-        ->orWhere('description','LIKE','%'.$req->input('q').'%')
-        ->get();
-        return view('products',['products'=>$data])->with(['searched'=>$searched]);
+    $data=products::paginate(5);
+    return view('products',['products'=>$data],['cat'=>$cat])->with(['searched'=>$searched]);
+    // return view('adminpanel',['products'=>$data]);
+}
+
+function search(Request $req)
+{
+    $searched=$req->input('query');
+    $data= Products::
+    where('product_name', 'like', '%'.$req->input('query').'%')
+    ->orWhere('description','LIKE','%'.$req->input('query').'%')
+    ->get();
+    return view('products',['products'=>$data])->with(['searched'=>$searched]);
 
 
-        // view()->share('data',$data);   
-        // $pdf = PDF::loadView('searchedpdf',$data);
-        
+    // view()->share('data',$data);   
+    // $pdf = PDF::loadView('searchedpdf',$data);
     
-        // return $pdf->download('searchedpdf_file.pdf');
 
-    }
+    // return $pdf->download('searchedpdf_file.pdf');
+
+}
 
     function pdfOfSearched(Request $req)
     {

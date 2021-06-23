@@ -84,9 +84,6 @@
  
   
  
-  <!-- @foreach ($cat as $cato)
-  <a href="productbycat/{{$cato->cat_name}}" class="w3-bar-item w3-button">{{$cato->cat_name}}<span class="badge">2</span></a>&nbsp&nbsp
-  @endforeach -->
 
 
 
@@ -126,11 +123,15 @@
 </div>
 @endforeach -->
 <section class="content">
-                          
+                           
+                               
+                               
+
+                            <div class="card-body table-responsive p-0"> 
 
             <form action="/search" class="navbar-form navbar-right">
           <div class="form-group">
-            <input type="text" name="q" class="form-control search-box" placeholder="Search">
+            <input type="text" value="" name="query" class="form-control search-box" placeholder="Search">
           </div>
           <button type="submit" class="btn btn-default">Search</button>
         </form>
@@ -205,11 +206,11 @@
                           </div>   
                               <!-- /.card -->
                            </section>
+                        
 
-                           <!--  -->
-                            <a class="btn btn-primary" href="generate-pdf-products/{{ $searched or 'Default' }}">Export to PDF</a>
+                            <a class="btn btn-primary" href="generate-pdf-products/{{$searched}}">Export to PDF</a>
                             <span data-href="tasks" id="export" class="btn btn-success" onclick="exportTasks(event.target);">Export As CSV</span>
-
+                            
 
 
                             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -280,6 +281,3 @@
 </script>
 </body>
 </html>
-
-
-
