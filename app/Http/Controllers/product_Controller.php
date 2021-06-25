@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
-use App\Models\products;
+use App\Models\Product;
 use App\Models\carts;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use PDF;
+use Illuminate\Support\Facades\Auth;
 use App\Functions\functions;
 use Illuminate\Support\Facades\Session;
 
@@ -26,7 +28,8 @@ function index()
     $cat = DB::select('select * from categories');
     // $searched="hello";
 
-    $data=products::paginate(5);
+    // $data=products::paginate(5);
+    $data=Product::all();
     return view('products',['products'=>$data],['cat'=>$cat]);
     // return view('adminpanel',['products'=>$data]);
     // ->with(['searched'=>$searched])
@@ -35,7 +38,7 @@ function index()
 function search(Request $req)
 {
     $searched=$req->input('query');
-    $data= Products::
+    $data= Product::
     where('product_name', 'like', '%'.$req->input('query').'%')
     ->orWhere('description','LIKE','%'.$req->input('query').'%')
     ->get();
@@ -56,7 +59,7 @@ function search(Request $req)
         // $searched = $req->query;
         
         $searched=$req->input('searchedq');
-        $data= Products::
+        $data= Product::
         where('product_name', 'like', '%'. $searched .'%')
         ->orWhere('description','LIKE','%'. $searched .'%')
         ->get();
@@ -74,7 +77,7 @@ function search(Request $req)
         $start=$req->input('starts');
         $end=$req->input('ends');
 
-        $data = Products::whereBetween('price',[$start,$end])->get();
+        $data = Product::whereBetween('price',[$start,$end])->get();
 
         view()->share('data',$data);   
         $pdf = PDF::loadView('pdfofpricefiltered',$data);
@@ -89,7 +92,7 @@ function search(Request $req)
         $start=$req->input('start');
         $end=$req->input('end');
 
-        $products = Products::whereBetween('price',[$start,$end])->get();
+        $products = Product::whereBetween('price',[$start,$end])->get();
         return view('productbyprice',['products'=>$products])->with(['start'=>$start,'end'=>$end]);
 
     }
@@ -127,17 +130,19 @@ function search(Request $req)
 
 
         // $userid = $req->session()->get('userid');
-        if( $req->session()->get('userid'))
+        // if( $req->session()->get('userid'))
+        if (Auth::user()) 
         {
-
+            $id=Auth::id();
+            // dd($id);
             $cartitemexist= DB::table('carts')
-            ->where('userid',$req->session()->get('userid'))
+            ->where('userid',$id)
             ->where('token',$req->token)
             ->count();
 
             if($cartitemexist>0)
             {
-                return redirect('products')->with('alreadyexist', 'Item Already Exist In Cart.');
+                return redirect('allproducts')->with('alreadyexist', 'Item Already Exist In Cart.');
             }
 
             else{
@@ -145,12 +150,56 @@ function search(Request $req)
                 $cart=new carts;
                 $cart->token=$req->token;
                 $cart->price=$req->price;
-                $cart->userid=$req->session()->get('userid');
+                $cart->userid=$id;
                 $cart->quantity=1;
 
                 $cart->save();
+                  
+                $wishlistid=$req->wishlistid;
+                Wishlist::destroy($wishlistid);
 
-                return redirect('products')->with('added', 'Item Successfully Added In Cart.');
+
+                return redirect('allproducts')->with('added', 'Item Successfully Added In Cart.');
+            }
+        }
+        else
+        {
+            return redirect('login')->with('login', 'Please LogIn First To Shop With Us.');
+        }
+    }
+
+    function addtowishlist(Request $req)
+    {
+        if (Auth::user()) 
+        {
+            $id=Auth::id();
+            // dd($id);
+            $wishlistitemexist= DB::table('wishlists')
+            ->where('userid',$id)
+            ->where('token',$req->token)
+            ->count();
+
+            $cartitemexist= DB::table('carts')
+            ->where('userid',$id)
+            ->where('token',$req->token)
+            ->count();
+
+            if($cartitemexist>0 || $wishlistitemexist>0 )
+            {
+                return redirect('allproducts')->with('alreadyexist', 'Item Already Exist .');
+            }
+
+            else{
+
+                $wishlist=new Wishlist;
+                $wishlist->token=$req->token;
+                $wishlist->price=$req->price;
+                $wishlist->userid=$id;
+               
+
+                $wishlist->save();
+
+                return redirect('allproducts')->with('addedtowishlist', 'Item Successfully Added In WishList.');
             }
         }
         else
@@ -161,7 +210,7 @@ function search(Request $req)
 
     static function cartitem()
     {
-        $userid = Session::get('userid');
+        $userid =  Auth::id();
         return DB::table('carts')
         ->where('userid', $userid)
         ->count();   
@@ -169,7 +218,7 @@ function search(Request $req)
 
     static function cartitemtotal()
     {
-        $userid = Session::get('userid');
+        $userid =  Auth::id();
         return DB::table('carts')
         ->join('products', 'carts.token', '=', 'products.token')
         ->where('userid', $userid)
@@ -179,7 +228,7 @@ function search(Request $req)
 
     static function cart_item_total_with_gst()
     {
-        $userid = Session::get('userid');
+        $userid =  Auth::id();
         // $carttotalwithgst= DB::table('carts')
         // ->join('products', 'carts.token', '=', 'products.token')
         // ->where('userid', $userid)
@@ -199,7 +248,7 @@ function search(Request $req)
 
     static function price_with_qty_increase()
     {
-        $userid = Session::get('userid');
+        $userid = Auth::id();
         // $qty= DB::table('carts')
         // ->join('products', 'carts.token', '=', 'products.token')
         // ->where('userid', $userid)
@@ -232,7 +281,8 @@ function search(Request $req)
 
     function showcart(Request $req)
     {
-        $userid = $req->session()->get('userid');
+        // $userid = $req->session()->get('userid');
+        $userid=Auth::id();
 
         
 

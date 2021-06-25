@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Models\orders;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class checkout_Controller extends Controller
 {
     function checkout(Request $req)
     {
-        $userid = $req->session()->get('userid');
+        $userid = Auth::id();
         $cartitems = DB::table('carts')
             ->join('products', 'carts.token', '=', 'products.token')
             ->where('carts.userid',$userid)
@@ -27,6 +27,7 @@ class checkout_Controller extends Controller
 
     function insert(Request $request)
     {
+        $userid = Auth::id();
         // $email = $request->input('email') ;
         $address = $request->input('address');
         $email = $request->input('email');
@@ -34,7 +35,7 @@ class checkout_Controller extends Controller
         $state = $request->input('state');
         $city = $request->input('city');
         $zip = $request->input('zip');
-        $userid = $request->session()->get('userid');
+       
 
     $query=DB::table('orders')->insert(
     [
@@ -55,7 +56,7 @@ class checkout_Controller extends Controller
         // return $ret;
         
         
-        $userid = $request->session()->get('userid');
+        $userid = Auth::id();
         $cartitems = DB::table('carts')
             ->join('products', 'carts.token', '=', 'products.token')
             ->where('carts.userid',$userid)

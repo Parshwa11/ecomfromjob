@@ -152,6 +152,7 @@ $price_with_qty_increase=product_Controller::price_with_qty_increase();
 
  <a class="btn btn-primary" href="{{ URL::to('generate-pdf') }}">Export to PDF</a>
  <a class="btn btn-primary" href="{{ URL::to('export') }}">Export to Excel</a>
+ <a class="btn btn-success" href="pay">Pay</a>
 
 </body>
 </html>

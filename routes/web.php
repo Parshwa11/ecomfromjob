@@ -4,6 +4,12 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PaymentController;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
 
@@ -19,15 +25,26 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
+
+
+Route::get('/pay', [PaymentController::class, 'index']);
+Route::post('/transaction', [PaymentController::class, 'makePayment'])->name('make-payment');
+
+
+
 // Route::get('/', function () {
 //     return view('index');
 // });
 
 Route::get('/','admin_Controller@index');
 
-Route::get('pdfview',array('as'=>'pdfview','uses'=>'pdf_Controller@pdfview'));
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
+// Route::get('pdfview',array('as'=>'pdfview','uses'=>'pdf_Controller@pdfview'));
 
+Route::get('wishlistitemdel/{id}', 'WishlistController@destroy');
 Route::get('signup', function () {
     return view('signup');
 });
@@ -44,12 +61,14 @@ Route::get('invoice_astext', function () {
 
 Route::get('checkout','checkout_Controller@checkout');
 
-Route::get('search','product_Controller@search');
+// Route::get('search','product_Controller@search');
 // Route::get('search','product_Controller@searchbyprice');
 
 Route::get('contact', function () {
     return view('contact');
 });
+
+
 
 Route::get('about', function () {
     return view('about');
@@ -72,14 +91,14 @@ Route::post('tasks2', 'admin_Controller@csvOfSearchedByPrice');
 Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
 Route::get('generate-pdf-products', [PDFController::class, 'productspdf']);
 // Route::get('generate-pdf-searched', [product_Controller::class, 'search']);
-Route::post('generate-pdf-searched','product_Controller@pdfOfSearched');
-Route::post('generate-pdf-pricefilter','product_Controller@pdfOfPriceFilterSearched');
+// Route::post('generate-pdf-searched','product_Controller@pdfOfSearched');
+// Route::post('generate-pdf-pricefilter','product_Controller@pdfOfPriceFilterSearched');
 
-Route::post('productbyprice','product_Controller@productbyprice');
+// Route::post('productbyprice','product_Controller@productbyprice');
 
-Route::get('pdfy','pdfy_Controller@hello');
+// Route::get('pdfy','pdfy_Controller@hello');
 Route::post('signed','signup_Controller@signed');
-Route::get('products','product_Controller@index');
+Route::get('allproducts','product_Controller@index');
 Route::get('export_as_xls','checkout_Controller@export');
 Route::get('showusers','adminpanel_Controller@showusers');
 Route::get('/updatecartqty/{id}/{quantity}','cart_Controller@updatecartqty');
@@ -97,13 +116,15 @@ Route::post('/adminpanel','adminpanel_Controller@update');
 Route::post('submit','signup_Controller@insert');
 Route::post('cosubmit','contact_Controller@insert');
 Route::post('addtocart','product_Controller@addtocart');
+Route::post('addtowishlist','product_Controller@addtowishlist');
 Route::post('ordered','checkout_Controller@insert');
 Route::get('showcart','product_Controller@showcart');
+Route::get('wishlist','WishlistController@showwishlist');
 Route::get('removecart/{cartid}','cart_Controller@removecart');
 
 // Route::post('submit', [test::class, 'hello']);
 
-Route::get('/login', function () {
+Route::get('login1', function () {
     return view('login');
 });
 
@@ -126,3 +147,31 @@ Route::get('/footer', function () {
 //          ->get();    
 //     $view->with('cartitems', $cartitems);
 // });
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+ 
+Auth::routes();
+  
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+  
+// Route::group(['middleware' => ['auth']], function() {
+//     Route::resource('roles', RoleController::class);
+//     Route::resource('users', UserController::class);
+//     Route::resource('products', ProductController::class);
+
+    
+// });
+
+// Route::resources([
+//     'roles' => RoleController::class,
+//     'users' => UserController::class,
+//     'products' => ProductController::class,
+// ]);
+
+// Route::resource('users', UserController::class);
+Route::resource('users', 'UserController')->middleware(['auth']);
+Route::resource('roles', 'RoleController')->middleware(['auth']);
+Route::resource('products', 'ProductController')->middleware(['auth']);
+// Route::resource('photos', PhotoController::class);

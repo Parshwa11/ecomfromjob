@@ -43,6 +43,10 @@ $total=product_Controller::cartitem();
 </head>
 
 <body>
+<ul class="navbar-nav ml-auto">
+                        <!-- Authentication Links -->
+                       
+                    </ul>
 
     <!-- Start Main Top -->
     <div class="main-top">
@@ -92,16 +96,43 @@ $total=product_Controller::cartitem();
                         <!-- <p>Call US :- <a href="#"> +91 (9664912183)</a></p> -->
                       
          
-          @if(Session::has('userid'))
+          <!-- @if(Session::has('userid'))
         <a href="logout"> <button class='btn btn-success'>LOGOUT</button></a>
           @else
-          <a href="login"> <button class='btn btn-primary'>LOGIN</button></a>
-          @endif
+          <a href="login1"> <button class='btn btn-primary'>LOGIN</button></a>
+          @endif -->
+
+                        @guest
+                            <a  href="{{ route('login') }}"><button class='btn btn-success'>LOGIN</button></a>
+                            <a  href="{{ route('register') }}"><button class='btn btn-primary'>REGISTER</button></a>
+                        @else
+                            
+                            <li class="nav-item dropdown">
+                                <a  class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <button class='btn btn-success'>{{ Auth::user()->name }}</button>   <span class="caret"></span>
+                                </a>
+
+
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+
         
                     </div>
                     <div class="our-link">
                         <ul>
-                            <li><a href="products">All Products</a></li>
+                            <li><a href="allproducts">All Products</a></li>
                             <li><a href="signup">My Account</a></li>
                             <li><a href="contact">Contact Us</a></li>
                         </ul>

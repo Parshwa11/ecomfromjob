@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\products;
+use App\Models\Product;
 use App\Models\signup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -10,7 +10,7 @@ class adminpanel_Controller extends Controller
 {
     function index()
     {
-        $data=products::paginate(5);
+        $data=Product::paginate(5);
         return view('adminpanel',['products'=>$data]);
         // return view('adminpanel',['products'=>$data]);
     }
@@ -64,18 +64,18 @@ class adminpanel_Controller extends Controller
 function delproduct($id,Request $request)
 {
        
-       $query=products::where('id',$id)->first();
+       $query=Product::where('id',$id)->first();
 
     if($query)
     {
-        products::where('id',$id)->delete();
+        Product::where('id',$id)->delete();
         return redirect('/adminpanel')->with('delete', 'Your Product Has Been Succcessfully Deleted.');
     }
 }
 
 function showproduct($id,Request $request)
 {
-    $data=products::find($id);
+    $data=Product::find($id);
     // $users = DB::table('products')->where('id', $id)->get(); 
     // $users = DB::select('select * from products where id='$id');
     return view('showprofile',['data'=>$data]);
@@ -91,7 +91,7 @@ function showproduct($id,Request $request)
 
 function updateproduct($id,Request $request)
 {
-    $data=products::find($id);
+    $data=Product::find($id);
 
     return view('updateproduct',['data'=>$data]);
 

@@ -92,10 +92,10 @@ $total=product_Controller::cartitem();
                         <!-- <p>Call US :- <a href="#"> +91 (9664912183)</a></p> -->
                       
          
-          @if(Session::has('userid'))
+          @if(Auth::id())
         <a href="logout"> <button class='btn btn-success'>LOGOUT</button></a>
           @else
-          <a href="login"> <button class='btn btn-primary'>LOGIN</button></a>
+          <a href="login1"> <button class='btn btn-primary'>LOGIN</button></a>
           @endif
         
                     </div>

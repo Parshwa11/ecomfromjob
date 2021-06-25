@@ -58,6 +58,14 @@
         {{ session('added') }}
     </div>
 @endif
+@if (session('addedtowishlist'))
+    <div class="alert alert-success">
+        {{ session('addedtowishlist') }}
+    </div>
+@endif
+
+
+
 <?php $id=0;
 ?>
 
@@ -153,8 +161,8 @@
       
       
       </div>
-
-
+      <a href="wishlist"><button class='btn btn-primary' style="float: right;"> <i class="fa fa-heart" aria-hidden="true"></i></button></a>&nbsp
+     
         <a href="showcart"><button class='btn btn-success' style="float: right;"> <i class="fas fa-shopping-cart"></i></button></a>
                             <table class="table table-hover text-nowrap" >
                             <thead>
@@ -181,7 +189,15 @@
                                 padding: 5px;
                                 width: 100px;'
                                 src="{{asset('/images/'.$item->image)}}" class="img-circle elevation-2" alt="User Image"></td>
-                                
+                                <td><a href="showprofile/{{$item->id}}"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></a></td>
+
+                                <td> <form action="addtowishlist" method="POST">
+                                @csrf
+                                  <input type="hidden" value="{{$item['token']}}" name="token" >
+                                  <input type="hidden" value="{{$item['price']}}" name="price" >
+                                  <button class="btn btn-warning">Add To WishList</button>
+                                </form></td>
+
                                <td> <form action="addtocart" method="POST">
                                 @csrf
                                   <input type="hidden" value="{{$item['token']}}" name="token" >
